@@ -8,18 +8,18 @@
     <string name="previous">Previous</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="preference_theme_header">Tema de la aplicación</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Preferences messages -->
+    <string name="preference_theme_title">Tema oscuro</string>
+    <string name="preference_theme_summary_on">Sound Zen mostrará su tema oscuro</string>
+    <string name="preference_theme_summary_off">Sound Zen mostrará su tema claro</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- Preferences keys -->
+    <string name="preference_theme_key">soundzentheme</string>
+
+
+
     <string name="action_my_music">MyMusic</string>
     <string name="action_download_music">DownloadMusic</string>
     <string name="action_rapid_fire">RapidFire</string>

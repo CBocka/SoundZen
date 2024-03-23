@@ -32,5 +32,15 @@
         <item name="colorOnCustomColor1Container">#00fcf6</item>
         <item name="harmonizeCustomColor1">true</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
+
+    <style name="Base.Theme.SoundZen.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Base.Theme.SoundZen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Base.Theme.SoundZen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

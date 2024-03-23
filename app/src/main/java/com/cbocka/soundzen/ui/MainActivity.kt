@@ -10,9 +10,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.ui.NavigationUI
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.databinding.ActivityMainBinding
+import com.cbocka.soundzen.utils.Locator
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +22,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val darkTheme : Boolean = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
+        setTheme(darkTheme)
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,10 +38,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         NavigationUI.setupWithNavController(binding.contentMain.navBottom, navController)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        setAppBarGone()
+        setBottomNavVisible()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -75,5 +79,12 @@ class MainActivity : AppCompatActivity() {
 
     fun setBottomNavVisible() {
         binding.contentMain.navBottom.visibility = View.VISIBLE
+    }
+
+    fun setTheme(darkTheme: Boolean) {
+        when (darkTheme) {
+            true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 }
