@@ -10,13 +10,29 @@
         android:name="com.cbocka.soundzen.ui.SplashFragment"
         android:label="fragment_first_blank"
         tools:layout="@layout/fragment_splash" >
+
         <action
-            android:id="@+id/action_splashFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_splashFragment_to_myMusicFragment"
+            app:destination="@id/myMusicFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.cbocka.soundzen.ui.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        android:id="@+id/myMusicFragment"
+        android:name="com.cbocka.soundzen.ui.mymusic.MyMusicFragment"
+        android:label="fragment_my_music"
+        tools:layout="@layout/fragment_my_music" />
+    <fragment
+        android:id="@+id/downloadMusicFragment"
+        android:name="com.cbocka.soundzen.ui.downloadmusic.DownloadMusicFragment"
+        android:label="fragment_download_music"
+        tools:layout="@layout/fragment_download_music" />
+    <fragment
+        android:id="@+id/rapidFireFragment"
+        android:name="com.cbocka.soundzen.ui.rapidfire.RapidFireFragment"
+        android:label="fragment_rapid_fire"
+        tools:layout="@layout/fragment_rapid_fire" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.cbocka.soundzen.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+
 </navigation>

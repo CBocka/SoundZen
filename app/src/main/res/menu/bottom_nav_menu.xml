@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.cbocka.soundzen.ui.MainActivity">
+
+    <item
+        android:id="@+id/myMusicFragment"
+        android:icon="@drawable/ic_music"
+        android:title="@string/action_my_music" />
+    <item
+        android:id="@+id/rapidFireFragment"
+        android:icon="@drawable/ic_rapidfire"
+        android:title="@string/action_rapid_fire" />
+    <item
+        android:id="@+id/downloadMusicFragment"
+        android:icon="@drawable/ic_download"
+        android:title="@string/action_download_music" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/action_settings" />
+
+</menu>

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.cbocka.soundzen.MainActivity
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.databinding.FragmentSplashBinding
 
@@ -33,9 +32,10 @@ class SplashFragment : Fragment() {
         super.onStart()
 
         (activity as MainActivity).setAppBarGone()
+        (activity as MainActivity).setBottomNavGone()
 
         var r = Runnable {
-            findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_myMusicFragment)
         }
         Handler(Looper.getMainLooper()).postDelayed(r, 2000)
     }

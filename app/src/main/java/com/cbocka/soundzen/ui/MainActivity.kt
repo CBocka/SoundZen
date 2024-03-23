@@ -1,4 +1,4 @@
-package com.cbocka.soundzen
+package com.cbocka.soundzen.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +9,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.navigation.ui.NavigationUI
+import com.cbocka.soundzen.R
 import com.cbocka.soundzen.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(binding.contentMain.navBottom, navController)
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -62,5 +66,14 @@ class MainActivity : AppCompatActivity() {
 
     fun setAppBarVisible() {
         supportActionBar!!.show()
+        binding.appBarLayout.visibility = View.VISIBLE
+    }
+
+    fun setBottomNavGone() {
+        binding.contentMain.navBottom.visibility = View.GONE
+    }
+
+    fun setBottomNavVisible() {
+        binding.contentMain.navBottom.visibility = View.VISIBLE
     }
 }
