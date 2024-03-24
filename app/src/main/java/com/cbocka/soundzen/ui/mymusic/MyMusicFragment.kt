@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
+import com.cbocka.soundzen.data.repository.SongRepository
 import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.mymusic.adapter.MyMusicListAdapter
@@ -46,6 +48,7 @@ class MyMusicFragment : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when(it) {
+                is MyMusicListState.Loading -> onLoading(it.show)
                 MyMusicListState.NoData -> onNoData()
                 else -> onSuccess()
             }
@@ -76,6 +79,13 @@ class MyMusicFragment : Fragment() {
 
     private fun onNoData() {
         binding.rvMyMusic.visibility = View.GONE
+    }
+
+    private fun onLoading(showLoading : Boolean) {
+        if (showLoading)
+            findNavController().navigate(R.id.action_myMusicFragment_to_fragmentProgressDialog)
+        else
+            findNavController().popBackStack()
     }
 
     private fun onSuccess() {

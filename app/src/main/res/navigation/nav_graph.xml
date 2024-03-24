@@ -19,7 +19,11 @@
         android:id="@+id/myMusicFragment"
         android:name="com.cbocka.soundzen.ui.mymusic.MyMusicFragment"
         android:label="fragment_my_music"
-        tools:layout="@layout/fragment_my_music" />
+        tools:layout="@layout/fragment_my_music" >
+        <action
+            android:id="@+id/action_myMusicFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
     <fragment
         android:id="@+id/downloadMusicFragment"
         android:name="com.cbocka.soundzen.ui.downloadmusic.DownloadMusicFragment"
@@ -34,5 +38,9 @@
         android:id="@+id/settingsFragment"
         android:name="com.cbocka.soundzen.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <dialog
+        android:id="@+id/fragmentProgressDialog"
+        android:name="com.cbocka.soundzen.ui.base.FragmentProgressDialog"
+        android:label="FragmentProgressDialog" />
 
 </navigation>

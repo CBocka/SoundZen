@@ -1,7 +1,10 @@
 package com.cbocka.soundzen.data.dao
 
+import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
 import com.cbocka.soundzen.data.model.Song
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -22,7 +25,7 @@ class SongDaoStorage private constructor() {
                     mp3Files.addAll(findMP3Files(file))
                 } else {
                     // if is a file, verify if is a mp3 file
-                    if (file.name.toLowerCase().endsWith(".mp3")) {
+                    if (file.name.lowercase().endsWith(".mp3")) {
 
                         val songName : String
                         val artist : String
@@ -36,28 +39,15 @@ class SongDaoStorage private constructor() {
                             songName = file.name.dropLast(4).trim()
                         }
 
-                        val duration = getDuration(file)
                         val mp3Name = file.name
+                        val song = Song(songName, artist, "", mp3Name, file)
 
-                        mp3Files.add(Song(songName, artist, duration, mp3Name))
+                        mp3Files.add(song)
                     }
                 }
             }
         }
 
         return mp3Files
-    }
-
-    private fun getDuration(file: File): String {
-        val mediaPlayer = MediaPlayer()
-        mediaPlayer.setDataSource(file.path)
-        mediaPlayer.prepare()
-        val durationInMillis = mediaPlayer.duration
-        //mediaPlayer.release()
-
-        // convert duration song to mm:ss
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(durationInMillis.toLong())
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(durationInMillis.toLong()) % 60
-        return String.format("%02d:%02d", minutes, seconds)
     }
 }

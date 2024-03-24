@@ -6,6 +6,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="loading_title">Cargando…</string>
 
     <!-- Preference Titles -->
     <string name="preference_theme_header">Tema de la aplicación</string>

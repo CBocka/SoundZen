@@ -5,7 +5,7 @@ import com.cbocka.soundzen.data.model.Song
 import java.io.File
 
 class SongRepository private constructor() {
-    private var allSongs = ArrayList<Song>()
+    var allSongs = ArrayList<Song>()
 
     companion object  {
         val instance = SongRepository()
