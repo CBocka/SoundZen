@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.downloadmusic.DownloadMusicFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.cbocka.soundzen.ui.downloadmusic.usecase.DownloadMusicViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDownloadFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="DownloadMusicFragment" />
+        tools:context=".ui.downloadmusic.DownloadMusicFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilYouTubeLink"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="77dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/imgCopyFromClipboard"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieYouTubeLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={viewmodel.url}"
+                android:hint="@string/tie_YouTube_link_hint"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/imgCopyFromClipboard"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_paste_clipboard"
+            app:layout_constraintBottom_toBottomOf="@+id/tilYouTubeLink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tilYouTubeLink"
+            app:layout_constraintTop_toTopOf="@+id/tilYouTubeLink" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clYoutubePlayer"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilSongName">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilArtistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/imgCopyFromClipboard"
+            app:layout_constraintStart_toStartOf="@+id/tilYouTubeLink"
+            app:layout_constraintTop_toBottomOf="@+id/tilYouTubeLink">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieArtistName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tie_Artist_Name_hint"
+                android:text="@={viewmodel.artistName}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSongName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/tilArtistName"
+            app:layout_constraintStart_toStartOf="@+id/tilArtistName"
+            app:layout_constraintTop_toBottomOf="@+id/tilArtistName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieSongName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tie_Song_Name_hint"
+                android:text="@={viewmodel.songName}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnDownloadMP3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/btn_downloadmp3_text"
+            app:layout_constraintEnd_toEndOf="@+id/clYoutubePlayer"
+            app:layout_constraintStart_toStartOf="@+id/clYoutubePlayer"
+            app:layout_constraintTop_toBottomOf="@+id/clYoutubePlayer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

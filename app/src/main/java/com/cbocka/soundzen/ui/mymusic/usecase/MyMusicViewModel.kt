@@ -26,8 +26,9 @@ class MyMusicViewModel : ViewModel() {
             if (SongRepository.instance.allSongs.isEmpty()) {
                 state.postValue(MyMusicListState.Loading(true))
                 allSongs = SongRepository.instance.getAllSongs(File("/storage/emulated/0/Music"))
+                delay(800)
                 state.postValue(MyMusicListState.Loading(false))
-                delay(1)
+                delay(100)
             }
             else
                 allSongs = SongRepository.instance.allSongs

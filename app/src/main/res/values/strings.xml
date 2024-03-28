@@ -10,6 +10,7 @@
 
     <!-- Preference Titles -->
     <string name="preference_theme_header">Tema de la aplicación</string>
+    <string name="preference_order_header">Criterio de ordenación de las canciones</string>
 
     <!-- Preferences messages -->
     <string name="preference_theme_title">Tema oscuro</string>
@@ -19,10 +20,25 @@
     <!-- Preferences keys -->
     <string name="preference_theme_key">soundzentheme</string>
 
-
-
     <string name="action_my_music">MyMusic</string>
     <string name="action_download_music">DownloadMusic</string>
     <string name="action_rapid_fire">RapidFire</string>
+
+    <!-- MyMusicFragment -->
+    <string name="my_music_list_no_data">No se ha encontrado música que mostrar aún</string>
+    <string name="my_music_list_no_data2">Descarga tu primera canción o trae tu música al directorio:\n\"/storage/emulated/0/Music\"</string>
+    <string name="btn_goToDirectory_text">Ir a directorio</string>
+
+    <!-- DownloadMusicFragment -->
+    <string name="btn_downloadmp3_text">Descargar MP3</string>
+    <string name="tie_YouTube_link_hint">Enlace YouTube</string>
+    <string name="tie_Artist_Name_hint">Nombre del artista</string>
+    <string name="tie_Song_Name_hint">Nombre de la canción</string>
+    <string name="url_mandatory_error">Debes introducir una url</string>
+    <string name="artist_mandatory_error">Debes introducir el nombre del artista</string>
+    <string name="song_mandatory_error">Debes introducir el título de la canción</string>
+    <string name="url_invalid_error">Debes introducir una url válida</string>
+    <string name="dialog_title">Éxito</string>
+    <string name="dialog_message">Se ha descargado tu canción en la ubicación especificada</string>
 
 </resources>

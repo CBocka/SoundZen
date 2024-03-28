@@ -1,6 +1,8 @@
 package com.cbocka.soundzen.ui.mymusic
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
-import com.cbocka.soundzen.data.repository.SongRepository
 import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.mymusic.adapter.MyMusicListAdapter
 import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicListState
 import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicViewModel
 import com.cbocka.soundzen.utils.Locator
+
 
 class MyMusicFragment : Fragment() {
 
@@ -45,6 +47,10 @@ class MyMusicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+
+        binding.btnGoToDirectory.setOnClickListener {
+            openFileDirectory()
+        }
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when(it) {
@@ -79,6 +85,11 @@ class MyMusicFragment : Fragment() {
 
     private fun onNoData() {
         binding.rvMyMusic.visibility = View.GONE
+        binding.imgCircle.visibility = View.VISIBLE
+        binding.animationViewItemList.visibility = View.VISIBLE
+        binding.tvMyMusicNoData.visibility = View.VISIBLE
+        binding.tvMyMusicNoData2.visibility = View.VISIBLE
+        binding.btnGoToDirectory.visibility = View.VISIBLE
     }
 
     private fun onLoading(showLoading : Boolean) {
@@ -90,6 +101,21 @@ class MyMusicFragment : Fragment() {
 
     private fun onSuccess() {
         binding.rvMyMusic.visibility = View.VISIBLE
+        binding.imgCircle.visibility = View.GONE
+        binding.animationViewItemList.visibility = View.GONE
+        binding.tvMyMusicNoData.visibility = View.GONE
+        binding.tvMyMusicNoData2.visibility = View.GONE
+        binding.btnGoToDirectory.visibility = View.GONE
+
         songsAdapter.submitList(viewModel.allSongs)
+    }
+
+    private fun openFileDirectory() {
+        val path = "/storage/emulated/0/Music"
+        val uri = Uri.parse(path)
+        val intent = Intent(Intent.ACTION_PICK)
+
+        intent.setDataAndType(uri, "*/*")
+        startActivity(intent)
     }
 }

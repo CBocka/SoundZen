@@ -28,7 +28,11 @@
         android:id="@+id/downloadMusicFragment"
         android:name="com.cbocka.soundzen.ui.downloadmusic.DownloadMusicFragment"
         android:label="fragment_download_music"
-        tools:layout="@layout/fragment_download_music" />
+        tools:layout="@layout/fragment_download_music" >
+        <action
+            android:id="@+id/action_downloadMusicFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
     <fragment
         android:id="@+id/rapidFireFragment"
         android:name="com.cbocka.soundzen.ui.rapidfire.RapidFireFragment"
