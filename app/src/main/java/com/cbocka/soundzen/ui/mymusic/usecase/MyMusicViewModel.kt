@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.repository.SongRepository
+import com.cbocka.soundzen.utils.Locator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -23,7 +24,7 @@ class MyMusicViewModel : ViewModel() {
     fun getSongList() {
         viewModelScope.launch(Dispatchers.IO) {
 
-            if (SongRepository.instance.allSongs.isEmpty()) {
+            if (Locator.loadSongs) {
                 state.postValue(MyMusicListState.Loading(true))
                 allSongs = SongRepository.instance.getAllSongs(File("/storage/emulated/0/Music"))
                 delay(800)
@@ -38,5 +39,9 @@ class MyMusicViewModel : ViewModel() {
                 else -> state.postValue(MyMusicListState.Success)
             }
         }
+    }
+
+    fun resetState() {
+        state.value = MyMusicListState.Completed
     }
 }

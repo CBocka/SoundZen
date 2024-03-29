@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
 import com.cbocka.soundzen.ui.MainActivity
+import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.mymusic.adapter.MyMusicListAdapter
 import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicListState
 import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicViewModel
@@ -56,11 +57,17 @@ class MyMusicFragment : Fragment() {
             when(it) {
                 is MyMusicListState.Loading -> onLoading(it.show)
                 MyMusicListState.NoData -> onNoData()
-                else -> onSuccess()
+                MyMusicListState.Success -> onSuccess()
+                else -> {}
             }
         })
 
         viewModel.getSongList()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.resetState()
     }
 
     override fun onDestroyView() {
@@ -93,8 +100,10 @@ class MyMusicFragment : Fragment() {
     }
 
     private fun onLoading(showLoading : Boolean) {
-        if (showLoading)
+        if (showLoading) {
+            FragmentProgressDialog.title = getString(R.string.mymusic_loading_title)
             findNavController().navigate(R.id.action_myMusicFragment_to_fragmentProgressDialog)
+        }
         else
             findNavController().popBackStack()
     }
@@ -106,6 +115,8 @@ class MyMusicFragment : Fragment() {
         binding.tvMyMusicNoData.visibility = View.GONE
         binding.tvMyMusicNoData2.visibility = View.GONE
         binding.btnGoToDirectory.visibility = View.GONE
+
+        Locator.loadSongs = false
 
         songsAdapter.submitList(viewModel.allSongs)
     }

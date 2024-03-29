@@ -12,8 +12,7 @@ class SongRepository private constructor() {
     }
 
     fun getAllSongs(directory: File) : ArrayList<Song> {
-        if (allSongs.isEmpty())
-            allSongs = SongDaoStorage.instance.findMP3Files(directory)
+        allSongs = SongDaoStorage.instance.findMP3Files(directory)
 
         return allSongs
     }

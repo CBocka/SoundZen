@@ -25,14 +25,10 @@
             app:destination="@id/fragmentProgressDialog" />
     </fragment>
     <fragment
-        android:id="@+id/downloadMusicFragment"
-        android:name="com.cbocka.soundzen.ui.downloadmusic.DownloadMusicFragment"
+        android:id="@+id/downloadMusicYTFragment"
+        android:name="com.cbocka.soundzen.ui.downloadmusic.yt.DownloadMusicYTFragment"
         android:label="fragment_download_music"
-        tools:layout="@layout/fragment_download_music" >
-        <action
-            android:id="@+id/action_downloadMusicFragment_to_fragmentProgressDialog"
-            app:destination="@id/fragmentProgressDialog" />
-    </fragment>
+        tools:layout="@layout/fragment_download_music_yt" />
     <fragment
         android:id="@+id/rapidFireFragment"
         android:name="com.cbocka.soundzen.ui.rapidfire.RapidFireFragment"
@@ -46,5 +42,19 @@
         android:id="@+id/fragmentProgressDialog"
         android:name="com.cbocka.soundzen.ui.base.FragmentProgressDialog"
         android:label="FragmentProgressDialog" />
+    <fragment
+        android:id="@+id/downloadMusicParentFragment"
+        android:name="com.cbocka.soundzen.ui.downloadmusic.DownloadMusicParentFragment"
+        android:label="DownloadMusicParentFragment"
+        tools:layout="@layout/fragment_download_music_parent" >
+        <action
+            android:id="@+id/action_downloadMusicParentFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/downloadMusicSearchFragment"
+        android:name="com.cbocka.soundzen.ui.downloadmusic.search.DownloadMusicSearchFragment"
+        android:label="fragment_download_music_search"
+        tools:layout="@layout/fragment_download_music_search" />
 
 </navigation>

@@ -6,7 +6,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="loading_title">Cargando…</string>
+    <string name="mymusic_loading_title">Cargando…</string>
+    <string name="download_loading_title">Descargando…</string>
 
     <!-- Preference Titles -->
     <string name="preference_theme_header">Tema de la aplicación</string>
@@ -38,7 +39,10 @@
     <string name="artist_mandatory_error">Debes introducir el nombre del artista</string>
     <string name="song_mandatory_error">Debes introducir el título de la canción</string>
     <string name="url_invalid_error">Debes introducir una url válida</string>
-    <string name="dialog_title">Éxito</string>
+    <string name="dialog_title">Descarga completada</string>
     <string name="dialog_message">Se ha descargado tu canción en la ubicación especificada</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="download_search_tab_text">Buscar Canción</string>
 
 </resources>

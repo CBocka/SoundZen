@@ -6,21 +6,21 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.cbocka.soundzen.ui.downloadmusic.usecase.DownloadMusicViewModel" />
+            type="com.cbocka.soundzen.ui.downloadmusic.yt.usecase.DownloadMusicYTViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clDownloadFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.downloadmusic.DownloadMusicFragment">
+        tools:context=".ui.downloadmusic.yt.DownloadMusicYTFragment">
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilYouTubeLink"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="77dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/imgCopyFromClipboard"
             app:layout_constraintHorizontal_bias="0.5"
@@ -32,9 +32,9 @@
                 android:id="@+id/tieYouTubeLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.url}"
                 android:hint="@string/tie_YouTube_link_hint"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={viewmodel.url}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -53,7 +53,7 @@
             android:layout_width="350dp"
             android:layout_height="200dp"
 
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilSongName">
@@ -99,7 +99,7 @@
             android:id="@+id/btnDownloadMP3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="24dp"
             android:text="@string/btn_downloadmp3_text"
             app:layout_constraintEnd_toEndOf="@+id/clYoutubePlayer"
             app:layout_constraintStart_toStartOf="@+id/clYoutubePlayer"

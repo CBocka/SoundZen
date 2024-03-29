@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_rapidfire"
         android:title="@string/action_rapid_fire" />
     <item
-        android:id="@+id/downloadMusicFragment"
+        android:id="@+id/downloadMusicParentFragment"
         android:icon="@drawable/ic_download"
         android:title="@string/action_download_music" />
     <item

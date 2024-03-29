@@ -20,4 +20,6 @@ object Locator {
     val settingsPreferencesRepository by lazy {
         DataStorePreferencesRepository(requireApplication.settingsSore)
     }
+
+    var loadSongs : Boolean = true
 }

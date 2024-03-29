@@ -21,6 +21,7 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Base.Theme.SoundZen.NoActionBar">

@@ -8,6 +8,9 @@ import androidx.fragment.app.DialogFragment
 import com.cbocka.soundzen.R
 
 class FragmentProgressDialog : DialogFragment() {
+    companion object {
+        var title: String = ""
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inflater = LayoutInflater.from(requireContext())
@@ -17,7 +20,7 @@ class FragmentProgressDialog : DialogFragment() {
 
         builder.setView(view)
         builder.setCancelable(false)
-        builder.setTitle(getString(R.string.loading_title))
+        builder.setTitle(title)
 
         val dialog = builder.create()
         dialog.setCanceledOnTouchOutside(false)

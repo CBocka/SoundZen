@@ -1,29 +1,21 @@
-package com.cbocka.soundzen.ui.downloadmusic.usecase
+package com.cbocka.soundzen.ui.downloadmusic.yt.usecase
 
-import android.media.MediaMetadataRetriever
 import android.text.TextUtils
-import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.model.SongMP3
 import com.cbocka.soundzen.data.repository.SongMP3Repository
 import com.cbocka.soundzen.utils.Utils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
-import java.io.File
-import java.util.concurrent.TimeUnit
 
-class DownloadMusicViewModel : ViewModel() {
+class DownloadMusicYTViewModel : ViewModel() {
 
     lateinit var videoId: String
 
-    private val state = MutableLiveData<DownloadMusicState>()
+    private val state = MutableLiveData<DownloadMusicYTState>()
 
-    fun getState(): MutableLiveData<DownloadMusicState> {
+    fun getState(): MutableLiveData<DownloadMusicYTState> {
         return state
     }
 
@@ -52,12 +44,14 @@ class DownloadMusicViewModel : ViewModel() {
     fun validateSong() {
         viewModelScope.launch {
             when {
-                TextUtils.isEmpty(url.value) -> state.value = DownloadMusicState.UrlIsMandatory
-                TextUtils.isEmpty(artistName.value) -> state.value = DownloadMusicState.ArtistIsMandatory
-                TextUtils.isEmpty(songName.value) -> state.value = DownloadMusicState.SongNameIsMandatory
-                videoId == "" -> state.value = DownloadMusicState.UrlNotValid
+                TextUtils.isEmpty(url.value) -> state.value = DownloadMusicYTState.UrlIsMandatory
+                TextUtils.isEmpty(artistName.value) -> state.value =
+                    DownloadMusicYTState.ArtistIsMandatory
+                TextUtils.isEmpty(songName.value) -> state.value =
+                    DownloadMusicYTState.SongNameIsMandatory
+                videoId == "" -> state.value = DownloadMusicYTState.UrlNotValid
                 else -> {
-                    state.value = DownloadMusicState.Loading(true)
+                    state.value = DownloadMusicYTState.Loading(true)
 
                     RequestBase64(state).start()
                 }
@@ -73,23 +67,27 @@ class DownloadMusicViewModel : ViewModel() {
             "$downloadPath/${artistName.value.toString().trim()} -- ${songName.value.toString().trim()}.mp3"
         )
 
-        state.value = DownloadMusicState.Success
+        state.value = DownloadMusicYTState.Success
     }
 
-    inner class RequestBase64(private val downloadMusicState: MutableLiveData<DownloadMusicState>) :
+    inner class RequestBase64(private val downloadMusicState: MutableLiveData<DownloadMusicYTState>) :
         Thread() {
         override fun run() {
             super.run()
             songMp3 = getMP3FromYTLink(url.value.toString())
 
-            downloadMusicState.postValue(DownloadMusicState.Loading(false))
+            downloadMusicState.postValue(DownloadMusicYTState.Loading(false))
             sleep(300)
 
-            downloadMusicState.postValue(DownloadMusicState.SongOK)
+            downloadMusicState.postValue(DownloadMusicYTState.SongOK)
         }
     }
 
     private fun getMP3FromYTLink(ytLink: String): SongMP3 {
         return SongMP3Repository.instance.getMP3FromYTLink(ytLink)
+    }
+
+    fun resetState() {
+        state.value = DownloadMusicYTState.Completed
     }
 }

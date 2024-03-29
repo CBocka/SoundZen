@@ -1,13 +1,11 @@
-package com.cbocka.soundzen.ui.downloadmusic
+package com.cbocka.soundzen.ui.downloadmusic.yt
 
 import android.content.ClipDescription
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
-import android.os.Debug
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +16,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cbocka.soundzen.R
-import com.cbocka.soundzen.data.model.SongMP3
-import com.cbocka.soundzen.databinding.FragmentDownloadMusicBinding
+import com.cbocka.soundzen.databinding.FragmentDownloadMusicYtBinding
 import com.cbocka.soundzen.ui.MainActivity
+import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.base.OneOptionDialog
-import com.cbocka.soundzen.ui.downloadmusic.usecase.DownloadMusicState
-import com.cbocka.soundzen.ui.downloadmusic.usecase.DownloadMusicViewModel
-import com.google.android.material.textfield.TextInputEditText
+import com.cbocka.soundzen.ui.downloadmusic.yt.usecase.DownloadMusicYTState
+import com.cbocka.soundzen.ui.downloadmusic.yt.usecase.DownloadMusicYTViewModel
+import com.cbocka.soundzen.utils.Locator
 import com.google.android.material.textfield.TextInputLayout
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -32,13 +30,12 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.You
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kotlinx.coroutines.launch
 
+class DownloadMusicYTFragment : Fragment() {
 
-class DownloadMusicFragment : Fragment() {
-
-    private var _binding: FragmentDownloadMusicBinding? = null
+    private var _binding: FragmentDownloadMusicYtBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: DownloadMusicViewModel by viewModels()
+    private val viewModel: DownloadMusicYTViewModel by viewModels()
 
     private lateinit var ytPlayer: YouTubePlayer
 
@@ -50,7 +47,7 @@ class DownloadMusicFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDownloadMusicBinding.inflate(inflater, container, false)
+        _binding = FragmentDownloadMusicYtBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -60,6 +57,7 @@ class DownloadMusicFragment : Fragment() {
         initYoutubePlayer()
         initViewModel()
 
+        binding.tieYouTubeLink.addTextChangedListener(ArtistAndSongTextWatcher(binding.tilYouTubeLink))
         binding.tieArtistName.addTextChangedListener(ArtistAndSongTextWatcher(binding.tilArtistName))
         binding.tieSongName.addTextChangedListener(ArtistAndSongTextWatcher(binding.tilSongName))
 
@@ -74,7 +72,7 @@ class DownloadMusicFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        binding.tieYouTubeLink.setText("")
+        viewModel.resetState()
     }
 
     override fun onDestroyView() {
@@ -101,20 +99,23 @@ class DownloadMusicFragment : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when(it) {
-                DownloadMusicState.UrlIsMandatory -> setUrlMandatoryError()
-                DownloadMusicState.ArtistIsMandatory -> setArtistIsMandatoryError()
-                DownloadMusicState.SongNameIsMandatory -> setSongNameIsMandatoryError()
-                DownloadMusicState.UrlNotValid -> setUrlNotValidError()
-                is DownloadMusicState.Loading -> onLoading(it.showLoading)
-                DownloadMusicState.SongOK -> onSongOk()
-                DownloadMusicState.Success -> onSuccess()
+                DownloadMusicYTState.UrlIsMandatory -> setUrlMandatoryError()
+                DownloadMusicYTState.ArtistIsMandatory -> setArtistIsMandatoryError()
+                DownloadMusicYTState.SongNameIsMandatory -> setSongNameIsMandatoryError()
+                DownloadMusicYTState.UrlNotValid -> setUrlNotValidError()
+                is DownloadMusicYTState.Loading -> onLoading(it.showLoading)
+                DownloadMusicYTState.SongOK -> onSongOk()
+                DownloadMusicYTState.Success -> onSuccess()
+                else -> {}
             }
         })
     }
 
     private fun onLoading(showLoading: Boolean) {
-        if (showLoading)
-            findNavController().navigate(R.id.action_downloadMusicFragment_to_fragmentProgressDialog)
+        if (showLoading) {
+            FragmentProgressDialog.title = getString(R.string.download_loading_title)
+            findNavController().navigate(R.id.action_downloadMusicParentFragment_to_fragmentProgressDialog)
+        }
         else
             findNavController().popBackStack()
     }
@@ -148,6 +149,8 @@ class DownloadMusicFragment : Fragment() {
         binding.tieArtistName.setText("")
         binding.tieSongName.setText("")
         binding.clDownloadFragment.clearFocus()
+
+        Locator.loadSongs = true
 
         val dialog = OneOptionDialog.newInstance(getString(R.string.dialog_title), getString(R.string.dialog_message))
         dialog.show((context as AppCompatActivity).supportFragmentManager, OneOptionDialog.KEY)
