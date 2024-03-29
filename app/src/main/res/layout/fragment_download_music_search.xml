@@ -1,18 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.downloadmusic.search.DownloadMusicSearchFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEARCH FRAGMENT"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.cbocka.soundzen.ui.downloadmusic.search.usecase.DownloadMusicSearchViewModel" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSearchDownload"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.downloadmusic.search.DownloadMusicSearchFragment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilArtistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieArtistName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tie_Artist_Name_hint"
+                android:text="@={viewmodel.artistName}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSongName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/tilArtistName"
+            app:layout_constraintStart_toStartOf="@+id/tilArtistName"
+            app:layout_constraintTop_toBottomOf="@+id/tilArtistName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieSongName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tie_Song_Name_hint"
+                android:text="@={viewmodel.songName}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnDownloadSearchMP3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/btn_searchmp3_text"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/soundzen_sin_fondo_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilSongName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

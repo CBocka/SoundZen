@@ -25,7 +25,11 @@ class TwoOptionsDialog() : DialogFragment() {
         builder.setNegativeButton(
             android.R.string.cancel
         )
-        { _, _ -> dismiss() }
+        { _, _ ->
+            val bundle = Bundle()
+            bundle.putBoolean(result, false)
+            requireActivity().supportFragmentManager.setFragmentResult(request, bundle)
+        }
 
         return builder.create()
     }
