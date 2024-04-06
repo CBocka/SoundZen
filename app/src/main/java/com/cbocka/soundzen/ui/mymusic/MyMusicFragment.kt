@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
+import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
@@ -76,9 +77,34 @@ class MyMusicFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        songsAdapter = MyMusicListAdapter(requireContext())
+        songsAdapter = MyMusicListAdapter(requireContext()) { song, list ->
+            onPlaySong(song, list)
+        }
+
         binding.rvMyMusic.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMyMusic.adapter = songsAdapter
+    }
+
+    private fun onPlaySong(song: Song, list: List<Song>) {
+        val playerOrder = Locator.settingsPreferencesRepository.getString(
+            getString(R.string.preference_player_order_key), "SEC")
+
+        val tmpList = mutableListOf<Song>()
+
+        when (playerOrder) {
+            "SEC" ->  {
+                tmpList.add(song)
+
+                tmpList.addAll(list.subList(list.indexOf(song) + 1, list.size))
+                tmpList.addAll(list.subList(0, list.indexOf(song)))
+            }
+            "RND" -> {
+                tmpList.add(song)
+                tmpList.addAll(list.filter { song != it }.shuffled())
+            }
+        }
+
+        (activity as MainActivity).startPlayer(tmpList)
     }
 
     private fun setBackgroundColor() {

@@ -16,7 +16,8 @@ import com.cbocka.soundzen.utils.Locator
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class MyMusicListAdapter(val context : Context) : ListAdapter<Song, MyMusicListAdapter.MyMusicViewHolder>(SONG_COMPARATOR) {
+class MyMusicListAdapter(private val context : Context, private val onClick : (Song, List<Song>) -> Unit)
+    : ListAdapter<Song, MyMusicListAdapter.MyMusicViewHolder>(SONG_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyMusicViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -41,6 +42,10 @@ class MyMusicListAdapter(val context : Context) : ListAdapter<Song, MyMusicListA
             binding.tvFileName.text = song.mp3Name
 
             setSeparatorColor(binding)
+
+            itemView.setOnClickListener {
+                onClick(song, currentList)
+            }
         }
 
         private fun setSeparatorColor(binding : ItemAudioFileLayoutBinding) {

@@ -1,12 +1,23 @@
 <resources>
     <!-- Order Preference -->
     <string-array name="order_entries">
-        <item>Título canción</item>
-        <item>Artista</item>
+        <item>@string/order_entries_text1</item>
+        <item>@string/order_entries_text2</item>
     </string-array>
 
     <string-array name="order_values">
         <item>SONG</item>
         <item>ARTIST</item>
+    </string-array>
+
+    <!-- Player Order Preference -->
+    <string-array name="player_order_entries">
+        <item>@string/player_order_entries_text1</item>
+        <item>@string/player_order_entries_text2</item>
+    </string-array>
+
+    <string-array name="player_order_values">
+        <item>SEC</item>
+        <item>RND</item>
     </string-array>
 </resources>

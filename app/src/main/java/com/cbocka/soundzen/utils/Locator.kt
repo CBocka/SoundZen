@@ -9,7 +9,7 @@ object Locator {
 
     private var application : Application? = null
 
-    private val requireApplication get() = application ?: error("Missing call: initWith(application)")
+    val requireApplication get() = application ?: error("Missing call: initWith(application)")
 
     fun initWith(application: Application) {
         this.application = application

@@ -62,7 +62,7 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
             val keyPref = stringPreferencesKey(key)
 
             dataStore.data.map { preferences ->
-                preferences[keyPref] ?: "none"
+                preferences[keyPref] ?: defValue
             }.first()
         }
 

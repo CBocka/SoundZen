@@ -13,14 +13,23 @@
     <!-- Preference Titles -->
     <string name="preference_theme_header">Tema de la aplicación</string>
     <string name="preference_order_header">Criterio de ordenación de las canciones</string>
+    <string name="preference_player_order_header">Criterio de reproducción de las canciones</string>
 
     <!-- Preferences messages -->
     <string name="preference_theme_title">Tema oscuro</string>
     <string name="preference_theme_summary_on">Sound Zen mostrará su tema oscuro</string>
     <string name="preference_theme_summary_off">Sound Zen mostrará su tema claro</string>
+    <string name="preference_songs_order">Selecciona el orden</string>
+    <string name="preference_songs_player_order">Selecciona el modo de reproducción</string>
+    <string name="order_entries_text1" >Título canción</string>
+    <string name="order_entries_text2" >Artista</string>
+    <string name="player_order_entries_text1" >Secuencial</string>
+    <string name="player_order_entries_text2" >Aleatorio</string>
 
     <!-- Preferences keys -->
-    <string name="preference_theme_key">soundzentheme</string>
+    <string name="preference_theme_key">soundzen_theme_key</string>
+    <string name="preference_order_list_key">soundzen_default_sort_key</string>
+    <string name="preference_player_order_key">soundzen_default_player_order_key</string>
 
     <string name="action_my_music">MyMusic</string>
     <string name="action_download_music">DownloadMusic</string>

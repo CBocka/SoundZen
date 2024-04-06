@@ -68,4 +68,10 @@ dependencies {
     //HTTP Requests
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.squareup.okhttp3:okhttp:4.9.2")
+
+    //Music Player
+    implementation("com.google.android.exoplayer:exoplayer-core:2.16.1")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.16.1")
+
+    implementation("androidx.media:media:1.7.0")
 }

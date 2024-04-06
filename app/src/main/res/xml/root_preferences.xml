@@ -4,10 +4,11 @@
     <PreferenceCategory app:title="@string/preference_theme_header">
 
         <SwitchPreferenceCompat
-            app:key="soundzentheme"
+            app:key="@string/preference_theme_key"
             app:summaryOff="@string/preference_theme_summary_off"
             app:summaryOn="@string/preference_theme_summary_on"
-            app:title="@string/preference_theme_title" />
+            app:title="@string/preference_theme_title"
+            android:icon="@drawable/ic_dark_mode"/>
 
     </PreferenceCategory>
 
@@ -17,8 +18,21 @@
             android:defaultValue="1"
             android:entries="@array/order_entries"
             android:entryValues="@array/order_values"
-            android:key="order_list_preference"
-            android:title="Selecciona el orden" />
+            android:key="@string/preference_order_list_key"
+            android:title="@string/preference_songs_order"
+            android:icon="@drawable/ic_sort"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/preference_player_order_header">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/player_order_entries"
+            android:entryValues="@array/player_order_values"
+            android:key="@string/preference_player_order_key"
+            android:title="@string/preference_songs_player_order"
+            android:icon="@drawable/ic_shuffle"/>
 
     </PreferenceCategory>
 

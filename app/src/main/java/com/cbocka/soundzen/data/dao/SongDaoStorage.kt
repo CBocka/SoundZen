@@ -35,7 +35,7 @@ class SongDaoStorage private constructor() {
                             songName = file.name.split("--")[1].dropLast(4).trim()
                         }
                         else {
-                            artist = "< Undefined >"
+                            artist = Song.DEFAULT_ARTIST
                             songName = file.name.dropLast(4).trim()
                         }
 
