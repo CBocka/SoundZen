@@ -38,7 +38,6 @@ class MusicService : Service() {
         currentSongIndex = 0
         firstTimeSongReady = true
 
-        startExoPlayer()
         if (intent != null && intent.hasExtra("music_files")) {
             musicFiles = intent.getSerializableExtra("music_files") as List<Song>
             playMusic()
@@ -47,7 +46,9 @@ class MusicService : Service() {
         return START_STICKY
     }
 
-    private fun startExoPlayer() {
+    override fun onCreate() {
+        super.onCreate()
+
         exoPlayer = SimpleExoPlayer.Builder(Locator.requireApplication).build()
         exoPlayer!!.addListener(object : Player.EventListener {
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
