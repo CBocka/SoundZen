@@ -35,7 +35,7 @@ class MyMusicListAdapter(private val context : Context, private val onClick : (S
             if (song.duration.isNotEmpty())
                 binding.tvDuration.text = song.duration
             else
-                FileDuration(song, song.file, binding.tvDuration).start()
+                FileDuration(song, File(song.filePath), binding.tvDuration).start()
 
             binding.tvSongName.text = song.songName
             binding.tvArtistName.text = song.artist

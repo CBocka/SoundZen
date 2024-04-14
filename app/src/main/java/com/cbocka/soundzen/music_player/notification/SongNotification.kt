@@ -13,7 +13,6 @@ import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MAX
 import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import androidx.media.app.NotificationCompat
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.music_player.service.MusicService

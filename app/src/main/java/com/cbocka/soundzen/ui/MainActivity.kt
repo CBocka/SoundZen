@@ -16,6 +16,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -44,7 +45,6 @@ import java.io.Serializable
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -271,10 +271,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startPlayer(files: List<Song>) {
-        binding.contentMain.cvSongPlaying.visibility = View.VISIBLE
+
+        val parcelableList = files as ArrayList<Parcelable>
 
         val intent = Intent(this, MusicService::class.java)
-        intent.putExtra("music_files", files as Serializable?)
+        intent.putParcelableArrayListExtra("music_files", parcelableList)
+
         startService(intent)
     }
 
@@ -292,29 +294,30 @@ class MainActivity : AppCompatActivity() {
     private fun onSeek(newPos: Long) {
         musicService!!.seekTo(newPos)
 
-        SongNotification.updateNotification(Locator.requireApplication, this)
+        SongNotification.updateNotification(this, this)
     }
 
     private fun onSongPause() {
         musicService!!.pause()
 
         binding.contentMain.imgPauseContinue.setImageResource(R.drawable.ic_play)
-        SongNotification.updateNotification(Locator.requireApplication, this)
+        SongNotification.updateNotification(this, this)
     }
 
     private fun onSongPlay() {
         musicService!!.resume()
 
+        binding.contentMain.cvSongPlaying.visibility = View.VISIBLE
         binding.contentMain.tvSongName.text = MusicService.musicFiles[MusicService.currentSongIndex].songName
         binding.contentMain.tvSongArtist.text = MusicService.musicFiles[MusicService.currentSongIndex].artist
 
         binding.contentMain.imgPauseContinue.setImageResource(R.drawable.ic_pause)
 
         if (SongNotification.getInstance().notification == null)
-            SongNotification.createNotification(Locator.requireApplication, this)
+            SongNotification.createNotification(this, this)
 
         else
-            SongNotification.updateNotification(Locator.requireApplication, this)
+            SongNotification.updateNotification(this, this)
     }
     //endregion
 }

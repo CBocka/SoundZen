@@ -40,7 +40,7 @@ class SongDaoStorage private constructor() {
                         }
 
                         val mp3Name = file.name
-                        val song = Song(songName, artist, "", mp3Name, file)
+                        val song = Song(songName, artist, "", mp3Name, file.absolutePath)
 
                         mp3Files.add(song)
                     }

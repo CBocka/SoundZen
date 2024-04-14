@@ -3,7 +3,9 @@ package com.cbocka.soundzen.music_player.service
 import android.app.Service
 import android.content.Intent
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
+import androidx.annotation.RequiresApi
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.music_player.notification.SongNotification
 import com.cbocka.soundzen.utils.Locator
@@ -34,12 +36,13 @@ class MusicService : Service() {
         return binder
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         currentSongIndex = 0
         firstTimeSongReady = true
 
         if (intent != null && intent.hasExtra("music_files")) {
-            musicFiles = intent.getSerializableExtra("music_files") as List<Song>
+            musicFiles = intent.getParcelableArrayListExtra("music_files", Song::class.java) as List<Song>
             playMusic()
         }
 
@@ -71,7 +74,7 @@ class MusicService : Service() {
         exoPlayer!!.stop()
         exoPlayer!!.clearMediaItems()
 
-        val musicFilePath = musicFiles[currentSongIndex].file.path
+        val musicFilePath = musicFiles[currentSongIndex].filePath
         val mediaItem: MediaItem = MediaItem.fromUri(musicFilePath)
         exoPlayer!!.setMediaItem(mediaItem)
         exoPlayer!!.prepare()
