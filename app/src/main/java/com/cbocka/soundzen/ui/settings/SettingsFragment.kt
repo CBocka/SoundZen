@@ -1,12 +1,16 @@
 package com.cbocka.soundzen.ui.settings
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.utils.Locator
+import kotlinx.coroutines.launch
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -16,6 +20,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         initPreferenceTheme()
         initOrderPreference()
         initPlayerOrderPreference()
+        initLocationPathPreference()
     }
 
     private fun initPreferenceTheme() {
@@ -48,4 +53,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
     }
+
+    private fun initLocationPathPreference() {
+        val location = preferenceManager.findPreference<Preference>(getString(R.string.preference_location_path_key))
+        location?.summary = Locator.settingsPreferencesRepository.getString(getString(R.string.preference_location_path_key),"/storage/emulated/0/Music/")
+
+        location!!.setOnPreferenceClickListener {
+            lifecycleScope.launch {
+                (activity as MainActivity).openFolderPicker()
+
+                Locator.settingsPreferencesRepository.putString(getString(R.string.preference_location_path_key), (activity as MainActivity).downloadPath)
+                location.summary = (activity as MainActivity).downloadPath
+
+                Locator.loadSongs = true
+            }
+            true
+        }
+    }
 }
+

@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">SoundZen</string>
-    <string name="action_settings">Settings</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
@@ -14,6 +13,7 @@
     <string name="preference_theme_header">Tema de la aplicación</string>
     <string name="preference_order_header">Criterio de ordenación de las canciones</string>
     <string name="preference_player_order_header">Criterio de reproducción de las canciones</string>
+    <string name="preference_player_songs_location_header">Ubicación para buscar tu música</string>
 
     <!-- Preferences messages -->
     <string name="preference_theme_title">Tema oscuro</string>
@@ -25,17 +25,25 @@
     <string name="order_entries_text2" >Artista</string>
     <string name="player_order_entries_text1" >Secuencial</string>
     <string name="player_order_entries_text2" >Aleatorio</string>
+    <string name="preference_player_songs_location">Directorio de música</string>
 
     <!-- Preferences keys -->
     <string name="preference_theme_key">soundzen_theme_key</string>
     <string name="preference_order_list_key">soundzen_default_sort_key</string>
     <string name="preference_player_order_key">soundzen_default_player_order_key</string>
+    <string name="preference_location_path_key">soundzen_location_path_key</string>
 
-    <string name="action_my_music">MyMusic</string>
-    <string name="action_download_music">DownloadMusic</string>
-    <string name="action_rapid_fire">RapidFire</string>
+    <string name="action_my_music">Mi Música</string>
+    <string name="action_download_music">Descargar</string>
+    <string name="action_rapid_fire">Rapid Fire</string>
+    <string name="action_settings">Preferencias</string>
 
     <!-- MyMusicFragment -->
+    <string name="all_music_tab_title">Canciones</string>
+    <string name="directories_tab_title">Carpetas</string>
+    <string name="fav_music_tab_title">Favoritas</string>
+    <string name="playlist_tab_title">Playlists</string>
+
     <string name="my_music_list_no_data">No se ha encontrado música que mostrar aún</string>
     <string name="my_music_list_no_data2">Descarga tu primera canción o trae tu música al directorio:\n\"/storage/emulated/0/Music\"</string>
     <string name="btn_goToDirectory_text">Ir a directorio</string>

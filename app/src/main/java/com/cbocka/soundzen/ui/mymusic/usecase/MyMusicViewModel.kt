@@ -32,7 +32,12 @@ class MyMusicViewModel() : ViewModel() {
 
             if (Locator.loadSongs) {
                 state.postValue(MyMusicListState.Loading(true))
-                SongRepository.instance.getAllSongs(File("/storage/emulated/0/Music/"))
+
+                SongRepository.instance.getAllSongs(File(
+                    Locator.settingsPreferencesRepository.getString(
+                        Locator.requireApplication.getString(R.string.preference_location_path_key),
+                        "/storage/emulated/0/Music/")!!))
+
                 delay(800)
                 state.postValue(MyMusicListState.Loading(false))
                 delay(100)

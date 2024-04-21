@@ -36,4 +36,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/preference_player_songs_location_header">
+
+        <Preference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="/storage/emulated/0/Music/"
+            android:selectAllOnFocus="true"
+            android:icon="@drawable/ic_action_directory_path"
+            android:singleLine="true"
+            android:key="@string/preference_location_path_key"
+            android:title="@string/preference_player_songs_location" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
