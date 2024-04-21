@@ -52,6 +52,7 @@
     <string name="delete_song_error_dialog_title">Error</string>
     <string name="delete_song_error_dialog_message">No pudo eliminarse la canción</string>
     <string name="Toast_song_deleted_message">Canción eliminada con éxito</string>
+    <string name="search_view_hint">Buscar canción...</string>
 
     <!-- MusicDirectoriesFragment -->
     <string name="music_directories_list_no_data">No se han encontrado directorios a mostrar</string>
@@ -77,5 +78,7 @@
     <string name="search_dialog_message">Sube el volumen, ¡Está sonando la canción!\n\n¿Es esta la que buscas?</string>
     <string name="search_error_dialog_title">Canción no encontrada</string>
     <string name="search_error_dialog_message">Asegúrate de introducir correctamente los datos de la canción y prueba de nuevo.\n\nSi persiste este error, intenta usar la herramienta de descarga por link.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

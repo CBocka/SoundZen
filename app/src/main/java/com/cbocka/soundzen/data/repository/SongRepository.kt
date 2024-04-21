@@ -19,6 +19,10 @@ class SongRepository private constructor() {
         return allSongs
     }
 
+    fun getSongsFromDirectory(directory: File) : ArrayList<Song> {
+        return SongDaoStorage.instance.findMP3Files(directory)
+    }
+
     fun getAllDirectories(directory: File) : ArrayList<MusicDirectory> {
         allDirectories = SongDaoStorage.instance.findDirectories(directory)
 

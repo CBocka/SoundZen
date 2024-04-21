@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
+import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.databinding.FragmentMyMusicDirectoriesBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
@@ -80,21 +81,23 @@ class MyMusicDirectoriesFragment : Fragment() {
         val darkTheme : Boolean = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
 
         if (darkTheme)
-            binding.rvMyDirectories.setBackgroundColor(Color.parseColor("#141414"))
+            binding.clMyMusicDirectories.setBackgroundColor(Color.parseColor("#141414"))
         else
-            binding.rvMyDirectories.setBackgroundColor(Color.parseColor("#ffffff"))
+            binding.clMyMusicDirectories.setBackgroundColor(Color.parseColor("#ffffff"))
     }
 
     private fun initRecyclerView() {
 
-        directoriesAdapter = MusicDirectoriesAdapter(requireContext()) { showSongsFromDirectory() }
+        directoriesAdapter = MusicDirectoriesAdapter(requireContext()) { showSongsFromDirectory(it) }
 
         binding.rvMyDirectories.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMyDirectories.adapter = directoriesAdapter
     }
 
-    private fun showSongsFromDirectory() {
-
+    private fun showSongsFromDirectory(directory : MusicDirectory) {
+        val bundle = Bundle()
+        bundle.putString(MusicDirectory.KEY, directory.path)
+        findNavController().navigate(R.id.action_myMusicParentFragment_to_songsInDirectoryFragment, bundle)
     }
 
     private fun onNoData() {

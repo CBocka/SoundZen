@@ -1,49 +1,55 @@
-package com.cbocka.soundzen.ui.mymusic.all_music
+package com.cbocka.soundzen.ui.mymusic.song_in_directory
 
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
+import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.model.Song
-import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
+import com.cbocka.soundzen.databinding.FragmentSongsInDirectoryBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.base.OneOptionDialog
 import com.cbocka.soundzen.ui.base.TwoOptionsDialog
 import com.cbocka.soundzen.ui.mymusic.all_music.adapter.MyMusicListAdapter
-import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
-import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicViewModel
+import com.cbocka.soundzen.ui.mymusic.song_in_directory.adapter.SongsInDirectoryAdapter
+import com.cbocka.soundzen.ui.mymusic.song_in_directory.usecase.SongsInDirectoryState
+import com.cbocka.soundzen.ui.mymusic.song_in_directory.usecase.SongsInDirectoryViewModel
 import com.cbocka.soundzen.utils.Locator
 
-class MyMusicFragment : Fragment() {
-
-    private var _binding : FragmentMyMusicBinding? = null
+class SongsInDirectoryFragment : Fragment() {
+    private var _binding : FragmentSongsInDirectoryBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : MyMusicViewModel by viewModels()
+    private val viewModel : SongsInDirectoryViewModel by viewModels()
 
-    private lateinit var songsAdapter : MyMusicListAdapter
+    private lateinit var songsAdapter : SongsInDirectoryAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.directoryPath = requireArguments().getString(MusicDirectory.KEY, "/storage/emulated/0/Music/")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMyMusicBinding.inflate(inflater, container, false)
+        _binding = FragmentSongsInDirectoryBinding.inflate(inflater, container, false)
 
-        (activity as MainActivity).setBottomNavVisible()
+        (activity as MainActivity).setBottomNavGone()
 
         setBackgroundColor()
 
@@ -63,9 +69,9 @@ class MyMusicFragment : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when(it) {
-                is MyMusicListState.Loading -> onLoading(it.show)
-                MyMusicListState.NoData -> onNoData()
-                MyMusicListState.Success -> onSuccess()
+                is SongsInDirectoryState.Loading -> onLoading(it.show)
+                SongsInDirectoryState.NoData -> onNoData()
+                SongsInDirectoryState.Success -> onSuccess()
                 else -> {}
             }
         })
@@ -87,7 +93,7 @@ class MyMusicFragment : Fragment() {
 
     private fun initRecyclerView() {
 
-        songsAdapter = MyMusicListAdapter(requireContext(), { song, list -> onPlaySong(song, list) }, {deleteSong(it)})
+        songsAdapter = SongsInDirectoryAdapter(requireContext(), { song, list -> onPlaySong(song, list) }, {deleteSong(it)})
 
         binding.rvMyMusic.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMyMusic.adapter = songsAdapter
@@ -152,9 +158,9 @@ class MyMusicFragment : Fragment() {
         val darkTheme : Boolean = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
 
         if (darkTheme)
-            binding.clMyMusic.setBackgroundColor(Color.parseColor("#141414"))
+            binding.clSongsInDirectory.setBackgroundColor(Color.parseColor("#141414"))
         else
-            binding.clMyMusic.setBackgroundColor(Color.parseColor("#ffffff"))
+            binding.clSongsInDirectory.setBackgroundColor(Color.parseColor("#ffffff"))
     }
 
     private fun onNoData() {
@@ -173,7 +179,7 @@ class MyMusicFragment : Fragment() {
     private fun onLoading(showLoading : Boolean) {
         if (showLoading) {
             FragmentProgressDialog.title = getString(R.string.mymusic_loading_title)
-            findNavController().navigate(R.id.action_myMusicParentFragment_to_fragmentProgressDialog)
+            findNavController().navigate(R.id.action_songsInDirectoryFragment_to_fragmentProgressDialog)
         }
         else
             findNavController().popBackStack()
@@ -202,7 +208,7 @@ class MyMusicFragment : Fragment() {
         startActivity(intent)
     }
 
-    inner class SearchViewText() : OnQueryTextListener {
+    inner class SearchViewText() : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {return true}
 
         override fun onQueryTextChange(newText: String?): Boolean {

@@ -11,7 +11,7 @@ import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.ItemAudioFileLayoutBinding
 import com.cbocka.soundzen.databinding.ItemMusicDirectoryLayoutBinding
 
-class MusicDirectoriesAdapter (private val context : Context, private val onClick : () -> Unit)
+class MusicDirectoriesAdapter (private val context : Context, private val onClick : (MusicDirectory) -> Unit)
 : ListAdapter<MusicDirectory, MusicDirectoriesAdapter.MusicDirectoryViewHolder>(DIRECTORY_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicDirectoryViewHolder {
@@ -29,6 +29,8 @@ class MusicDirectoriesAdapter (private val context : Context, private val onClic
         fun bind(musicDirectory: MusicDirectory) {
             binding.tvDirectoryName.text = musicDirectory.name
             binding.tvDirectoryPath.text = musicDirectory.path
+
+            itemView.setOnClickListener { onClick(musicDirectory) }
         }
     }
 
