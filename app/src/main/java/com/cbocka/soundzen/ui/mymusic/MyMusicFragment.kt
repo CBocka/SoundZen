@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -17,10 +19,13 @@ import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
+import com.cbocka.soundzen.ui.base.OneOptionDialog
+import com.cbocka.soundzen.ui.base.TwoOptionsDialog
 import com.cbocka.soundzen.ui.mymusic.adapter.MyMusicListAdapter
 import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicListState
 import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicViewModel
 import com.cbocka.soundzen.utils.Locator
+import java.io.File
 
 
 class MyMusicFragment : Fragment() {
@@ -77,9 +82,8 @@ class MyMusicFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        songsAdapter = MyMusicListAdapter(requireContext()) { song, list ->
-            onPlaySong(song, list)
-        }
+
+        songsAdapter = MyMusicListAdapter(requireContext(), { song, list -> onPlaySong(song, list) }, {deleteSong(it)})
 
         binding.rvMyMusic.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMyMusic.adapter = songsAdapter
@@ -105,6 +109,39 @@ class MyMusicFragment : Fragment() {
         }
 
         (activity as MainActivity).startPlayer(tmpList)
+    }
+
+    private fun deleteSong(song: Song) : Boolean {
+
+        val dialog = TwoOptionsDialog.newInstance(
+            getString(R.string.delete_song_dialog_title),
+            getString(R.string.delete_song_dialog_message))
+
+        dialog.show((context as AppCompatActivity).supportFragmentManager, TwoOptionsDialog.TAG)
+
+        dialog.parentFragmentManager.setFragmentResultListener(TwoOptionsDialog.request, viewLifecycleOwner) {
+                _, bundle ->
+            val result = bundle.getBoolean(TwoOptionsDialog.result)
+
+            if (result) {
+
+                val resource = viewModel.deleteSong(song)
+
+                if (resource) {
+                    viewModel.getSongList()
+                    Toast.makeText(requireContext(), getString(R.string.Toast_song_deleted_message), Toast.LENGTH_SHORT).show()
+
+                } else {
+                    val dialogError = OneOptionDialog.newInstance(
+                        getString(R.string.delete_song_error_dialog_title),
+                        getString(R.string.delete_song_error_dialog_message))
+
+                    dialogError.show((context as AppCompatActivity).supportFragmentManager, OneOptionDialog.KEY)
+                }
+            }
+        }
+
+        return true
     }
 
     private fun setBackgroundColor() {

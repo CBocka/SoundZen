@@ -36,13 +36,23 @@ class MusicService : Service() {
         return binder
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         currentSongIndex = 0
         firstTimeSongReady = true
 
         if (intent != null && intent.hasExtra("music_files")) {
-            musicFiles = intent.getParcelableArrayListExtra("music_files", Song::class.java) as List<Song>
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                musicFiles = intent.getParcelableArrayListExtra("music_files", Song::class.java) as List<Song>
+
+            } else {
+                val serializableExtra = intent.getSerializableExtra("music_files")
+
+                if (serializableExtra is List<*>) {
+                    musicFiles = serializableExtra as List<Song>
+                }
+            }
+
             playMusic()
         }
 

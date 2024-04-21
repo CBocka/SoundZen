@@ -50,4 +50,14 @@ class SongDaoStorage private constructor() {
 
         return mp3Files
     }
+
+    fun deleteSong(song: Song) : Boolean {
+
+        val file = File(song.filePath)
+
+        if (file.exists())
+            file.delete()
+
+        return true
+    }
 }

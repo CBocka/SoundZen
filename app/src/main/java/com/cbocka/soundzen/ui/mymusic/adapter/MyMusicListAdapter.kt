@@ -16,7 +16,10 @@ import com.cbocka.soundzen.utils.Locator
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class MyMusicListAdapter(private val context : Context, private val onClick : (Song, List<Song>) -> Unit)
+class MyMusicListAdapter(
+    private val context : Context,
+    private val onClick : (Song, List<Song>) -> Unit,
+    private val onLongClick : (Song) -> Boolean)
     : ListAdapter<Song, MyMusicListAdapter.MyMusicViewHolder>(SONG_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyMusicViewHolder {
@@ -45,6 +48,10 @@ class MyMusicListAdapter(private val context : Context, private val onClick : (S
 
             itemView.setOnClickListener {
                 onClick(song, currentList)
+            }
+
+            itemView.setOnLongClickListener {
+                onLongClick(song)
             }
         }
 

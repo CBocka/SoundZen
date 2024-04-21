@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
+import com.cbocka.soundzen.data.dao.SongDaoStorage
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.repository.SongRepository
 import com.cbocka.soundzen.utils.Locator
@@ -61,5 +62,10 @@ class MyMusicViewModel() : ViewModel() {
 
     fun resetState() {
         state.value = MyMusicListState.Completed
+    }
+
+    fun deleteSong(song: Song) : Boolean {
+        Locator.loadSongs = true
+        return SongRepository.instance.deleteSong(song)
     }
 }

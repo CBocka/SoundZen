@@ -16,4 +16,8 @@ class SongRepository private constructor() {
 
         return allSongs
     }
+
+    fun deleteSong(song: Song) : Boolean {
+        return SongDaoStorage.instance.deleteSong(song)
+    }
 }

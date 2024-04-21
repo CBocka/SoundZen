@@ -39,6 +39,11 @@
     <string name="my_music_list_no_data">No se ha encontrado música que mostrar aún</string>
     <string name="my_music_list_no_data2">Descarga tu primera canción o trae tu música al directorio:\n\"/storage/emulated/0/Music\"</string>
     <string name="btn_goToDirectory_text">Ir a directorio</string>
+    <string name="delete_song_dialog_title">Atención</string>
+    <string name="delete_song_dialog_message">¿Seguro que desea eliminar la canción?</string>
+    <string name="delete_song_error_dialog_title">Error</string>
+    <string name="delete_song_error_dialog_message">No pudo eliminarse la canción</string>
+    <string name="Toast_song_deleted_message">Canción eliminada con éxito</string>
 
     <!-- DownloadMusicYTFragment -->
     <string name="btn_downloadmp3_text">Descargar MP3</string>

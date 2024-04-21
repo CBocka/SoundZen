@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    private val PERMISSION_REQUEST_READ_MEDIA_AUDIO = 1
+    private val PERMISSION_REQUEST_CODE = 1
     private lateinit var requestLauncher: String
 
     lateinit var downloadPath: String
@@ -166,13 +166,30 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
+        val permissionsToRequest = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.POST_NOTIFICATIONS
+        )
+
+        val permissionsNeeded = mutableListOf<String>()
+        for (permission in permissionsToRequest) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                permissionsNeeded.add(permission)
+            }
+        }
+
+        if (permissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.READ_MEDIA_AUDIO, Manifest.permission.POST_NOTIFICATIONS),
-                PERMISSION_REQUEST_READ_MEDIA_AUDIO
+                permissionsNeeded.toTypedArray(),
+                PERMISSION_REQUEST_CODE
             )
         }
     }
