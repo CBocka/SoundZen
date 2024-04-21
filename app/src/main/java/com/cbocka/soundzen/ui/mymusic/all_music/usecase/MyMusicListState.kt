@@ -1,4 +1,4 @@
-package com.cbocka.soundzen.ui.mymusic.usecase
+package com.cbocka.soundzen.ui.mymusic.all_music.usecase
 
 sealed class MyMusicListState {
     data object NoData : MyMusicListState()

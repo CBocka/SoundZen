@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.cbocka.soundzen.ui.downloadmusic.search.DownloadMusicSearchFragment
 import com.cbocka.soundzen.ui.downloadmusic.yt.DownloadMusicYTFragment
 
-class PagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, private var mNumOfTabs: Int) :
+class DownloadMusicPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, private var mNumOfTabs: Int) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {

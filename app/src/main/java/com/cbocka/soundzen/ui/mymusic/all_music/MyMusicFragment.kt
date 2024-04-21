@@ -1,4 +1,4 @@
-package com.cbocka.soundzen.ui.mymusic
+package com.cbocka.soundzen.ui.mymusic.all_music
 
 import android.content.Intent
 import android.graphics.Color
@@ -21,11 +21,10 @@ import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.base.OneOptionDialog
 import com.cbocka.soundzen.ui.base.TwoOptionsDialog
-import com.cbocka.soundzen.ui.mymusic.adapter.MyMusicListAdapter
-import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicListState
-import com.cbocka.soundzen.ui.mymusic.usecase.MyMusicViewModel
+import com.cbocka.soundzen.ui.mymusic.all_music.adapter.MyMusicListAdapter
+import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
+import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicViewModel
 import com.cbocka.soundzen.utils.Locator
-import java.io.File
 
 
 class MyMusicFragment : Fragment() {
@@ -154,6 +153,10 @@ class MyMusicFragment : Fragment() {
     }
 
     private fun onNoData() {
+        binding.tvMyMusicNoData2.text = getString(R.string.my_music_list_no_data2,
+            Locator.settingsPreferencesRepository.getString(
+                getString(R.string.preference_location_path_key),"/storage/emulated/0/Music/"))
+
         binding.rvMyMusic.visibility = View.GONE
         binding.imgCircle.visibility = View.VISIBLE
         binding.animationViewItemList.visibility = View.VISIBLE
@@ -165,7 +168,7 @@ class MyMusicFragment : Fragment() {
     private fun onLoading(showLoading : Boolean) {
         if (showLoading) {
             FragmentProgressDialog.title = getString(R.string.mymusic_loading_title)
-            findNavController().navigate(R.id.action_myMusicFragment_to_fragmentProgressDialog)
+            findNavController().navigate(R.id.action_myMusicParentFragment_to_fragmentProgressDialog)
         }
         else
             findNavController().popBackStack()
@@ -185,7 +188,8 @@ class MyMusicFragment : Fragment() {
     }
 
     private fun openFileDirectory() {
-        val path = "/storage/emulated/0/Music"
+
+        val path = Locator.settingsPreferencesRepository.getString(getString(R.string.preference_location_path_key),"/storage/emulated/0/Music/")
         val uri = Uri.parse(path)
         val intent = Intent(Intent.ACTION_PICK)
 

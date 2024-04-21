@@ -1,31 +1,25 @@
-package com.cbocka.soundzen.ui.downloadmusic
+package com.cbocka.soundzen.ui.mymusic
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.PagerAdapter
 import com.cbocka.soundzen.R
-import com.cbocka.soundzen.databinding.FragmentDownloadMusicParentBinding
-import com.cbocka.soundzen.databinding.FragmentDownloadMusicYtBinding
-import com.cbocka.soundzen.ui.MainActivity
+import com.cbocka.soundzen.databinding.FragmentMyMusicParentBinding
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import com.google.android.material.tabs.TabLayoutMediator
 
-class DownloadMusicParentFragment : Fragment() {
+class MyMusicParentFragment : Fragment() {
 
-    private var _binding : FragmentDownloadMusicParentBinding? = null
+    private var _binding : FragmentMyMusicParentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDownloadMusicParentBinding.inflate(inflater, container, false)
+        _binding = FragmentMyMusicParentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,7 +34,7 @@ class DownloadMusicParentFragment : Fragment() {
     }
 
     private fun initTabLayout() {
-        val tabAdapter = DownloadMusicPagerAdapter(childFragmentManager, lifecycle, binding.tabLayout.tabCount)
+        val tabAdapter = MyMusicPagerAdapter(childFragmentManager, lifecycle, binding.tabLayout.tabCount)
 
         binding.viewPager.adapter = tabAdapter
 
@@ -48,12 +42,16 @@ class DownloadMusicParentFragment : Fragment() {
 
             when (position) {
                 0 -> {
-                    tab.text = "YouTube Link"
-                    tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_download_youtube)
+                    tab.text = getString(R.string.all_music_tab_title)
                 }
                 1 -> {
-                    tab.text = getString(R.string.download_search_tab_text)
-                    tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_download_search)
+                    tab.text = getString(R.string.directories_tab_title)
+                }
+                2 -> {
+                    tab.text = getString(R.string.fav_music_tab_title)
+                }
+                3 -> {
+                    tab.text = getString(R.string.playlist_tab_title)
                 }
             }
         }.attach()

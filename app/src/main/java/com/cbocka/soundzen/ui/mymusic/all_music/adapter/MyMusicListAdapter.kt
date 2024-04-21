@@ -1,4 +1,4 @@
-package com.cbocka.soundzen.ui.mymusic.adapter
+package com.cbocka.soundzen.ui.mymusic.all_music.adapter
 
 import android.content.Context
 import android.graphics.Color

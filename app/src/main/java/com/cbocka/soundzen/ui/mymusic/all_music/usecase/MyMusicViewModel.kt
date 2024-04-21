@@ -1,11 +1,9 @@
-package com.cbocka.soundzen.ui.mymusic.usecase
+package com.cbocka.soundzen.ui.mymusic.all_music.usecase
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
-import com.cbocka.soundzen.data.dao.SongDaoStorage
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.repository.SongRepository
 import com.cbocka.soundzen.utils.Locator

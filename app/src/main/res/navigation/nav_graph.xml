@@ -10,22 +10,15 @@
         android:name="com.cbocka.soundzen.ui.SplashFragment"
         android:label="fragment_first_blank"
         tools:layout="@layout/fragment_splash" >
-
         <action
-            android:id="@+id/action_splashFragment_to_myMusicFragment"
-            app:destination="@id/myMusicFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_splashFragment_to_myMusicParentFragment"
+            app:destination="@id/myMusicParentFragment" />
     </fragment>
     <fragment
         android:id="@+id/myMusicFragment"
-        android:name="com.cbocka.soundzen.ui.mymusic.MyMusicFragment"
+        android:name="com.cbocka.soundzen.ui.mymusic.all_music.MyMusicFragment"
         android:label="fragment_my_music"
-        tools:layout="@layout/fragment_my_music" >
-        <action
-            android:id="@+id/action_myMusicFragment_to_fragmentProgressDialog"
-            app:destination="@id/fragmentProgressDialog" />
-    </fragment>
+        tools:layout="@layout/fragment_my_music" />
     <fragment
         android:id="@+id/downloadMusicYTFragment"
         android:name="com.cbocka.soundzen.ui.downloadmusic.yt.DownloadMusicYTFragment"
@@ -58,5 +51,19 @@
         android:name="com.cbocka.soundzen.ui.downloadmusic.search.DownloadMusicSearchFragment"
         android:label="fragment_download_music_search"
         tools:layout="@layout/fragment_download_music_search" />
+    <fragment
+        android:id="@+id/myMusicDirectoriesFragment"
+        android:name="com.cbocka.soundzen.ui.mymusic.music_directories.MyMusicDirectoriesFragment"
+        android:label="fragment_my_music_directories"
+        tools:layout="@layout/fragment_my_music_directories" />
+    <fragment
+        android:id="@+id/myMusicParentFragment"
+        android:name="com.cbocka.soundzen.ui.mymusic.MyMusicParentFragment"
+        android:label="fragment_my_music_parent"
+        tools:layout="@layout/fragment_my_music_parent" >
+        <action
+            android:id="@+id/action_myMusicParentFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
 
 </navigation>

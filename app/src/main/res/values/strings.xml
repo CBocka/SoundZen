@@ -21,10 +21,10 @@
     <string name="preference_theme_summary_off">Sound Zen mostrará su tema claro</string>
     <string name="preference_songs_order">Selecciona el orden</string>
     <string name="preference_songs_player_order">Selecciona el modo de reproducción</string>
-    <string name="order_entries_text1" >Título canción</string>
-    <string name="order_entries_text2" >Artista</string>
-    <string name="player_order_entries_text1" >Secuencial</string>
-    <string name="player_order_entries_text2" >Aleatorio</string>
+    <string name="order_entries_text1">Título canción</string>
+    <string name="order_entries_text2">Artista</string>
+    <string name="player_order_entries_text1">Secuencial</string>
+    <string name="player_order_entries_text2">Aleatorio</string>
     <string name="preference_player_songs_location">Directorio de música</string>
 
     <!-- Preferences keys -->
@@ -45,13 +45,17 @@
     <string name="playlist_tab_title">Playlists</string>
 
     <string name="my_music_list_no_data">No se ha encontrado música que mostrar aún</string>
-    <string name="my_music_list_no_data2">Descarga tu primera canción o trae tu música al directorio:\n\"/storage/emulated/0/Music\"</string>
+    <string name="my_music_list_no_data2">Descarga tu primera canción o trae tu música al directorio:\n\"$1%s\"</string>
     <string name="btn_goToDirectory_text">Ir a directorio</string>
     <string name="delete_song_dialog_title">Atención</string>
     <string name="delete_song_dialog_message">¿Seguro que desea eliminar la canción?</string>
     <string name="delete_song_error_dialog_title">Error</string>
     <string name="delete_song_error_dialog_message">No pudo eliminarse la canción</string>
     <string name="Toast_song_deleted_message">Canción eliminada con éxito</string>
+
+    <!-- MusicDirectoriesFragment -->
+    <string name="music_directories_list_no_data">No se han encontrado directorios a mostrar</string>
+    <string name="music_directories_list_no_data2">Crea tus carpetas para separar tu música en:\n\"$1%s\"</string>
 
     <!-- DownloadMusicYTFragment -->
     <string name="btn_downloadmp3_text">Descargar MP3</string>

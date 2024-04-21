@@ -31,7 +31,7 @@ class SplashFragment : Fragment() {
         (activity as MainActivity).setBottomNavGone()
 
         val r = Runnable {
-            findNavController().navigate(R.id.action_splashFragment_to_myMusicFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_myMusicParentFragment)
         }
         Handler(Looper.getMainLooper()).postDelayed(r, 2000)
     }

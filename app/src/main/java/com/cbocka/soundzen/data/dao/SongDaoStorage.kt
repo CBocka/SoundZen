@@ -2,6 +2,7 @@ package com.cbocka.soundzen.data.dao
 
 import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
+import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.model.Song
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -51,6 +52,24 @@ class SongDaoStorage private constructor() {
         return mp3Files
     }
 
+    fun findDirectories(directory: File): ArrayList<MusicDirectory> {
+        val directories = ArrayList<MusicDirectory>()
+        val files = directory.listFiles()
+
+        files?.let {
+            for (file in it) {
+                if (file.isDirectory && !file.name.startsWith(".")) {
+                    val musicDirectory = MusicDirectory(file.name, file.absolutePath)
+
+                    directories.add(musicDirectory)
+                    directories.addAll(findDirectories(file))
+                }
+            }
+        }
+
+        return directories
+    }
+
     fun deleteSong(song: Song) : Boolean {
 
         val file = File(song.filePath)
@@ -60,4 +79,6 @@ class SongDaoStorage private constructor() {
 
         return true
     }
+
+
 }
