@@ -31,7 +31,7 @@ class SongsInDirectoryViewModel : ViewModel() {
 
             state.postValue(SongsInDirectoryState.Loading(true))
 
-            allSongs = SongRepository.instance.getAllSongs(File(directoryPath))
+            allSongs = SongRepository.instance.getSongsFromDirectory(File(directoryPath))
 
             delay(800)
             state.postValue(SongsInDirectoryState.Loading(false))

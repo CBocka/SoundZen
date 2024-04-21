@@ -4,7 +4,7 @@
     tools:context="com.cbocka.soundzen.ui.MainActivity">
 
     <item
-        android:id="@+id/myMusicFragment"
+        android:id="@+id/myMusicParentFragment"
         android:icon="@drawable/ic_music"
         android:title="@string/action_my_music" />
     <item
