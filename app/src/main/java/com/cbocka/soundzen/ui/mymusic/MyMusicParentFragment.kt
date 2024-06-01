@@ -50,9 +50,6 @@ class MyMusicParentFragment : Fragment() {
                 2 -> {
                     tab.text = getString(R.string.fav_music_tab_title)
                 }
-                3 -> {
-                    tab.text = getString(R.string.playlist_tab_title)
-                }
             }
         }.attach()
 

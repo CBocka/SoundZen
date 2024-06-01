@@ -79,6 +79,4 @@ class SongDaoStorage private constructor() {
 
         return true
     }
-
-
 }

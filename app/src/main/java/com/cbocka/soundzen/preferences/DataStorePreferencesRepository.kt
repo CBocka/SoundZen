@@ -14,6 +14,22 @@ import kotlinx.coroutines.runBlocking
 
 class DataStorePreferencesRepository(private val dataStore: DataStore<Preferences>) : PreferenceDataStore() {
 
+    private val FAVORITES_KEY = stringPreferencesKey("favorites")
+
+    fun saveFavoriteSongs(favoritePaths: Set<String>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            dataStore.edit { preferences ->
+                preferences[FAVORITES_KEY] = favoritePaths.multiSelectToString()
+            }
+        }
+    }
+
+    fun getFavoriteSongs(): Set<String> = runBlocking {
+        dataStore.data.map { preferences ->
+            preferences[FAVORITES_KEY]?.stringToMultiSelect() ?: emptySet()
+        }.first()
+    }
+
     override fun putString(key: String, value: String?) {
         putSettingValue(key, value)
     }

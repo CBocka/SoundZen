@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.FragmentMyMusicBinding
+import com.cbocka.soundzen.music_player.service.MusicService
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.base.OneOptionDialog
@@ -94,6 +95,7 @@ class MyMusicFragment : Fragment() {
     }
 
     private fun onPlaySong(song: Song, list: List<Song>) {
+
         val playerOrder = Locator.settingsPreferencesRepository.getString(
             getString(R.string.preference_player_order_key), "SEC")
 
@@ -112,7 +114,10 @@ class MyMusicFragment : Fragment() {
             }
         }
 
+        findNavController().navigate(R.id.action_myMusicParentFragment_to_songDetailsFragment)
+
         (activity as MainActivity).startPlayer(tmpList)
+        (activity as MainActivity).updatePlayerSongList(tmpList)
     }
 
     private fun deleteSong(song: Song) : Boolean {
@@ -203,16 +208,22 @@ class MyMusicFragment : Fragment() {
     }
 
     inner class SearchViewText() : OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String?): Boolean {return true}
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
 
         override fun onQueryTextChange(newText: String?): Boolean {
 
-            val filteredSongs = viewModel.allSongs.filter { song ->
-                song.artist.lowercase().contains(newText.orEmpty().lowercase()) ||
-                        song.songName.lowercase().contains(newText.orEmpty().lowercase())
+            viewModel.filteredSongs = if (newText.isNullOrEmpty()) {
+                viewModel.allSongs
+            } else {
+                viewModel.allSongs.filter { song ->
+                    song.artist.lowercase().contains(newText.lowercase()) ||
+                            song.songName.lowercase().contains(newText.lowercase())
+                }
             }
 
-            songsAdapter.submitList(filteredSongs)
+            songsAdapter.submitList(viewModel.filteredSongs)
             return true
         }
     }

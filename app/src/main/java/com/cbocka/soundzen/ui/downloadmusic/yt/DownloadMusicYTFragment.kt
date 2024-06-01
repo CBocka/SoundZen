@@ -151,6 +151,7 @@ class DownloadMusicYTFragment : Fragment() {
         binding.clDownloadFragment.clearFocus()
 
         Locator.loadSongs = true
+        Locator.loadDirectorySongs = true
 
         val dialog = OneOptionDialog.newInstance(getString(R.string.dialog_title), getString(R.string.dialog_message))
         dialog.show((context as AppCompatActivity).supportFragmentManager, OneOptionDialog.KEY)

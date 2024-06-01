@@ -128,6 +128,10 @@ class MainActivity : AppCompatActivity() {
         binding.contentMain.navBottom.visibility = View.VISIBLE
     }
 
+    fun updatePlayerSongList(newSongList: List<Song>) {
+        musicService?.updateMusicFiles(newSongList)
+    }
+
     fun setTheme(darkTheme: Boolean) {
         when (darkTheme) {
             true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -200,7 +204,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //region MUSIC PLAYER
-    private var musicService: MusicService? = null
+    var musicService: MusicService? = null
     private var isServiceBound = false
 
     private val serviceConnection: ServiceConnection = object : ServiceConnection {
@@ -274,7 +278,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMusicService() {
-        binding.contentMain.imgPauseContinue.setOnClickListener { v ->
+        binding.contentMain.imgPauseContinue.setOnClickListener { _ ->
             if (MusicService.exoPlayer!!.isPlaying) {
                 onSongPause()
             } else {
@@ -295,6 +299,14 @@ class MainActivity : AppCompatActivity() {
         intent.putParcelableArrayListExtra("music_files", parcelableList)
 
         startService(intent)
+    }
+
+    fun hidePlaybackControlsCardView() {
+        binding.contentMain.cvSongPlaying.visibility = View.GONE
+    }
+
+    fun showPlaybackControlsCardView() {
+        binding.contentMain.cvSongPlaying.visibility = View.VISIBLE
     }
 
     fun updateSongPlaying() {
@@ -324,7 +336,6 @@ class MainActivity : AppCompatActivity() {
     private fun onSongPlay() {
         musicService!!.resume()
 
-        binding.contentMain.cvSongPlaying.visibility = View.VISIBLE
         binding.contentMain.tvSongName.text = MusicService.musicFiles[MusicService.currentSongIndex].songName
         binding.contentMain.tvSongArtist.text = MusicService.musicFiles[MusicService.currentSongIndex].artist
 

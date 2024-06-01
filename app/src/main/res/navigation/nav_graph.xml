@@ -69,6 +69,9 @@
         <action
             android:id="@+id/action_myMusicParentFragment_to_songsInDirectoryFragment"
             app:destination="@id/songsInDirectoryFragment" />
+        <action
+            android:id="@+id/action_myMusicParentFragment_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/songsInDirectoryFragment"
@@ -78,6 +81,14 @@
         <action
             android:id="@+id/action_songsInDirectoryFragment_to_fragmentProgressDialog"
             app:destination="@id/fragmentProgressDialog" />
+        <action
+            android:id="@+id/action_songsInDirectoryFragment_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/songDetailsFragment"
+        android:name="com.cbocka.soundzen.ui.mymusic.song_details.SongDetailsFragment"
+        android:label="fragment_song_details"
+        tools:layout="@layout/fragment_song_details" />
 
 </navigation>

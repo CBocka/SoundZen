@@ -19,6 +19,7 @@ import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.FragmentSongsInDirectoryBinding
+import com.cbocka.soundzen.music_player.service.MusicService
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.base.OneOptionDialog
@@ -118,7 +119,10 @@ class SongsInDirectoryFragment : Fragment() {
             }
         }
 
+        findNavController().navigate(R.id.action_songsInDirectoryFragment_to_songDetailsFragment)
+
         (activity as MainActivity).startPlayer(tmpList)
+        (activity as MainActivity).updatePlayerSongList(tmpList)
     }
 
     private fun deleteSong(song: Song) : Boolean {
@@ -193,7 +197,7 @@ class SongsInDirectoryFragment : Fragment() {
         binding.tvMyMusicNoData2.visibility = View.GONE
         binding.btnGoToDirectory.visibility = View.GONE
 
-        Locator.loadSongs = false
+        Locator.loadDirectorySongs = false
 
         songsAdapter.submitList(viewModel.allSongs)
     }
@@ -213,12 +217,16 @@ class SongsInDirectoryFragment : Fragment() {
 
         override fun onQueryTextChange(newText: String?): Boolean {
 
-            val filteredSongs = viewModel.allSongs.filter { song ->
-                song.artist.lowercase().contains(newText.orEmpty().lowercase()) ||
-                        song.songName.lowercase().contains(newText.orEmpty().lowercase())
+            viewModel.filteredSongs = if (newText.isNullOrEmpty()) {
+                viewModel.allSongs
+            } else {
+                viewModel.allSongs.filter { song ->
+                    song.artist.lowercase().contains(newText.lowercase()) ||
+                            song.songName.lowercase().contains(newText.lowercase())
+                }
             }
 
-            songsAdapter.submitList(filteredSongs)
+            songsAdapter.submitList(viewModel.filteredSongs)
             return true
         }
     }

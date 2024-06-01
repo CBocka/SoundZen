@@ -18,8 +18,7 @@ class MyMusicPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle
         return when (position) {
             0 -> MyMusicFragment()
             1 -> MyMusicDirectoriesFragment()
-            2 -> MyMusicFragment() //DownloadMusicYTFragment()
-            3 -> MyMusicFragment() //DownloadMusicSearchFragment()
+            2 -> MyMusicFragment()
             else -> Fragment()
         }
     }

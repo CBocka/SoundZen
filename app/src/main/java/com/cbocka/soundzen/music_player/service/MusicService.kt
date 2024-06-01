@@ -90,6 +90,15 @@ class MusicService : Service() {
         exoPlayer!!.prepare()
     }
 
+    fun updateMusicFiles(newMusicFiles: List<Song>) {
+        musicFiles = newMusicFiles
+        currentSongIndex = 0
+
+        if (exoPlayer!!.isPlaying) {
+            playMusic()
+        }
+    }
+
     fun pause() {
         isPlaying = false
         exoPlayer!!.pause()

@@ -35,7 +35,7 @@
 
     <string name="action_my_music">Mi Música</string>
     <string name="action_download_music">Descargar</string>
-    <string name="action_rapid_fire">Rapid Fire</string>
+    <string name="action_pay_lists">Playlists</string>
     <string name="action_settings">Preferencias</string>
 
     <!-- MyMusicFragment -->
@@ -78,7 +78,9 @@
     <string name="search_dialog_message">Sube el volumen, ¡Está sonando la canción!\n\n¿Es esta la que buscas?</string>
     <string name="search_error_dialog_title">Canción no encontrada</string>
     <string name="search_error_dialog_message">Asegúrate de introducir correctamente los datos de la canción y prueba de nuevo.\n\nSi persiste este error, intenta usar la herramienta de descarga por link.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- SongDetailsFragment -->
+    <string name="switch_favourite_label">En favoritas</string>
+    <string name="switch_loop_label">Reproducción en bucle</string>
 
 </resources>

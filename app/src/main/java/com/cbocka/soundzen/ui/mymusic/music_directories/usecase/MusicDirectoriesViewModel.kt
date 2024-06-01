@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.repository.SongRepository
+import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
 import com.cbocka.soundzen.utils.Locator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,20 +26,22 @@ class MusicDirectoriesViewModel : ViewModel() {
     fun getDirectoriesList() {
         viewModelScope.launch(Dispatchers.IO) {
 
-            state.postValue(MusicDirectoriesState.Loading(true))
+            if (Locator.loadDirectories) {
+                state.postValue(MusicDirectoriesState.Loading(true))
 
-            allDirectories = SongRepository.instance.getAllDirectories(
-                File(
-                    Locator.settingsPreferencesRepository.getString(
-                        Locator.requireApplication.getString(R.string.preference_location_path_key),
-                        "/storage/emulated/0/Music/"
-                    )!!
+                allDirectories = SongRepository.instance.getAllDirectories(
+                    File(
+                        Locator.settingsPreferencesRepository.getString(
+                            Locator.requireApplication.getString(R.string.preference_location_path_key),
+                            "/storage/emulated/0/Music/"
+                        )!!
+                    )
                 )
-            )
 
-            delay(800)
-            state.postValue(MusicDirectoriesState.Loading(false))
-            delay(100)
+                delay(800)
+                state.postValue(MusicDirectoriesState.Loading(false))
+                delay(100)
+            }
 
             when {
                 allDirectories.isEmpty() -> state.postValue(MusicDirectoriesState.NoData)

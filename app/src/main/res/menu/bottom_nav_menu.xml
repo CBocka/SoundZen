@@ -10,7 +10,7 @@
     <item
         android:id="@+id/rapidFireFragment"
         android:icon="@drawable/ic_rapidfire"
-        android:title="@string/action_rapid_fire" />
+        android:title="@string/action_pay_lists" />
     <item
         android:id="@+id/downloadMusicParentFragment"
         android:icon="@drawable/ic_download"

@@ -21,6 +21,7 @@ class MyMusicViewModel() : ViewModel() {
     }
 
     var allSongs = mutableListOf<Song>()
+    var filteredSongs: List<Song> = allSongs
 
     fun getSongList() {
         viewModelScope.launch(Dispatchers.IO) {

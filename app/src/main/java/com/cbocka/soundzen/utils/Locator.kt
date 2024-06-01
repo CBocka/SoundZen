@@ -15,11 +15,13 @@ object Locator {
         this.application = application
     }
 
-    private val Context.settingsSore by preferencesDataStore("settings")
+    private val Context.settingsStore by preferencesDataStore("settings")
 
     val settingsPreferencesRepository by lazy {
-        DataStorePreferencesRepository(requireApplication.settingsSore)
+        DataStorePreferencesRepository(requireApplication.settingsStore)
     }
 
     var loadSongs : Boolean = true
+    var loadDirectories : Boolean = true
+    var loadDirectorySongs : Boolean = true
 }

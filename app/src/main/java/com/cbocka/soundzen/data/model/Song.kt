@@ -8,7 +8,8 @@ data class Song(
     val artist: String,
     var duration: String,
     val mp3Name: String,
-    val filePath: String
+    val filePath: String,
+    var isFavorite: Boolean = false
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -33,7 +34,7 @@ data class Song(
 
     companion object CREATOR : Parcelable.Creator<Song> {
 
-        val DEFAULT_ARTIST : String = "< Undefined >"
+        const val DEFAULT_ARTIST : String = "< Undefined >"
 
         override fun createFromParcel(parcel: Parcel): Song {
             return Song(parcel)
