@@ -3,8 +3,10 @@ package com.cbocka.soundzen.ui.mymusic.song_details
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,8 @@ import com.cbocka.soundzen.databinding.FragmentSongDetailsBinding
 import com.cbocka.soundzen.music_player.service.MusicService
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.utils.Locator
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.Player
 
 class SongDetailsFragment : Fragment() {
 
@@ -37,6 +41,40 @@ class SongDetailsFragment : Fragment() {
         return binding.root
     }
 
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        musicService = (activity as MainActivity).musicService!!
+
+        setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
+        setupPlaybackControls()
+
+        binding.swLoop.isChecked = false
+
+        binding.swLoop.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                musicService.setLooping(true)
+            } else {
+                musicService.setLooping(false)
+            }
+        }
+
+        MusicService.exoPlayer?.addListener(object : Player.EventListener {
+            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+
+                if (playbackState == ExoPlayer.STATE_READY || playbackState == ExoPlayer.STATE_BUFFERING) {
+                    val duration = MusicService.exoPlayer!!.duration
+                    val currentPosition = MusicService.exoPlayer!!.currentPosition
+                    binding.seekBar.max = duration.toInt()
+                    binding.seekBar.progress = currentPosition.toInt()
+                } else if (playbackState == ExoPlayer.STATE_ENDED) {
+                    musicService.playNext()
+                    setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
+                }
+            }
+        })
+    }*/
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,6 +82,32 @@ class SongDetailsFragment : Fragment() {
 
         setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
         setupPlaybackControls()
+
+        binding.swLoop.isChecked = MusicService.isLooping
+
+        binding.swLoop.setOnCheckedChangeListener { _, isChecked ->
+            musicService.setLooping(isChecked)
+        }
+
+        MusicService.exoPlayer?.addListener(object : Player.EventListener {
+            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                if (playbackState == ExoPlayer.STATE_READY || playbackState == ExoPlayer.STATE_BUFFERING) {
+                    val duration = MusicService.exoPlayer?.duration ?: 0
+                    val currentPosition = MusicService.exoPlayer?.currentPosition ?: 0
+                    binding.seekBar.max = duration.toInt()
+                    binding.seekBar.progress = currentPosition.toInt()
+
+                    if (playbackState == ExoPlayer.STATE_READY) {
+                        handler.post(updateSeekBar) // Comienza la actualización de la seekBar
+                    } else {
+                        handler.removeCallbacks(updateSeekBar) // Detiene la actualización cuando la reproducción no está en curso
+                    }
+                } else if (playbackState == ExoPlayer.STATE_ENDED) {
+                    musicService.playNext()
+                    setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -53,6 +117,8 @@ class SongDetailsFragment : Fragment() {
         (activity as MainActivity).showPlaybackControlsCardView()
 
         _binding = null
+
+        handler.removeCallbacks(updateSeekBar)
     }
 
     private fun setBackgroundColor() {
@@ -74,8 +140,11 @@ class SongDetailsFragment : Fragment() {
         binding.btnPlayPause.setOnClickListener {
             if (MusicService.isPlaying) {
                 musicService.pause()
+                binding.btnPlayPause.setImageResource(R.drawable.ic_play)
+
             } else {
                 musicService.resume()
+                binding.btnPlayPause.setImageResource(R.drawable.ic_pause)
             }
         }
 
@@ -113,5 +182,15 @@ class SongDetailsFragment : Fragment() {
     private fun resetSeekBar() {
         binding.seekBar.progress = 0
         binding.seekBar.max = MusicService.exoPlayer!!.duration.toInt()
+    }
+
+    private val handler = Handler()
+
+    private val updateSeekBar = object : Runnable {
+        override fun run() {
+            val currentPosition = MusicService.exoPlayer?.currentPosition ?: 0
+            binding.seekBar.progress = currentPosition.toInt()
+            handler.postDelayed(this, 1000)
+        }
     }
 }

@@ -5,15 +5,12 @@ import android.content.Intent
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import androidx.annotation.RequiresApi
 import com.cbocka.soundzen.data.model.Song
-import com.cbocka.soundzen.music_player.notification.SongNotification
 import com.cbocka.soundzen.utils.Locator
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
-import java.io.File
 
 class MusicService : Service() {
     companion object {
@@ -23,6 +20,7 @@ class MusicService : Service() {
         var exoPlayer: ExoPlayer? = null
         var firstTimeSongReady: Boolean = true
         var isPlaying: Boolean = true
+        var isLooping = false
     }
 
     private val binder: IBinder = MusicBinder()
@@ -66,8 +64,8 @@ class MusicService : Service() {
         exoPlayer!!.addListener(object : Player.EventListener {
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 if (playbackState == ExoPlayer.STATE_ENDED) {
-                    playNext()
-                } else if (playbackState == ExoPlayer.STATE_READY && firstTimeSongReady) { //exoPlayer.currentPosition == 0L
+                    playNextOrLoop()
+                } else if (playbackState == ExoPlayer.STATE_READY && firstTimeSongReady) {
                     firstTimeSongReady = false
 
                     exoPlayer!!.play()
@@ -126,5 +124,19 @@ class MusicService : Service() {
         firstTimeSongReady = true
 
         playMusic()
+    }
+
+    fun setLooping(looping: Boolean) {
+        isLooping = looping
+        exoPlayer!!.repeatMode = if (looping) ExoPlayer.REPEAT_MODE_ALL else ExoPlayer.REPEAT_MODE_OFF
+    }
+
+    fun playNextOrLoop() {
+        if (isLooping) {
+            exoPlayer!!.seekTo(0)
+            exoPlayer!!.play()
+        } else {
+            playNext()
+        }
     }
 }

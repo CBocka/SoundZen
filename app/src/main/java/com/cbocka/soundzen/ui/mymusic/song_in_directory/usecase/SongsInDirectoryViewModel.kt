@@ -31,15 +31,13 @@ class SongsInDirectoryViewModel : ViewModel() {
                 Locator.requireApplication.getString(R.string.preference_order_list_key), "SONG"
             )
 
-            if (Locator.loadDirectorySongs) {
-                state.postValue(SongsInDirectoryState.Loading(true))
+            state.postValue(SongsInDirectoryState.Loading(true))
 
-                allSongs = SongRepository.instance.getSongsFromDirectory(File(directoryPath))
+            allSongs = SongRepository.instance.getSongsFromDirectory(File(directoryPath))
 
-                delay(800)
-                state.postValue(SongsInDirectoryState.Loading(false))
-                delay(100)
-            }
+            delay(800)
+            state.postValue(SongsInDirectoryState.Loading(false))
+            delay(100)
 
             if (allSongs.isNotEmpty()) {
                 allSongs = when (songOrder) {

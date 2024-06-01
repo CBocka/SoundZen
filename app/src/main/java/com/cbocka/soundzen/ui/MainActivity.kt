@@ -32,7 +32,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.cbocka.soundzen.R
-import com.cbocka.soundzen.SoundZenApplication
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.ActivityMainBinding
 import com.cbocka.soundzen.music_player.notification.SongNotification
@@ -40,8 +39,6 @@ import com.cbocka.soundzen.music_player.service.MusicService
 import com.cbocka.soundzen.music_player.service.MusicService.MusicBinder
 import com.cbocka.soundzen.music_player.service.OnClearFromRecentService
 import com.cbocka.soundzen.utils.Locator
-import java.io.File
-import java.io.Serializable
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -347,5 +344,6 @@ class MainActivity : AppCompatActivity() {
         else
             SongNotification.updateNotification(this, this)
     }
+
     //endregion
 }

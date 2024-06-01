@@ -36,7 +36,6 @@ class SongNotification private constructor() {
         const val ACTION_NEXT = "action_next"
         const val ACTION_SEEK = "action_seek"
 
-
         @SuppressLint("MissingPermission")
         fun createNotification(context: Context, activity: MainActivity) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
