@@ -17,8 +17,6 @@ import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.databinding.FragmentMyMusicDirectoriesBinding
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
-import com.cbocka.soundzen.ui.mymusic.all_music.adapter.MyMusicListAdapter
-import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
 import com.cbocka.soundzen.ui.mymusic.music_directories.adapter.MusicDirectoriesAdapter
 import com.cbocka.soundzen.ui.mymusic.music_directories.usecase.MusicDirectoriesState
 import com.cbocka.soundzen.ui.mymusic.music_directories.usecase.MusicDirectoriesViewModel

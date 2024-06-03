@@ -1,13 +1,8 @@
 package com.cbocka.soundzen.data.dao
 
-import android.media.MediaMetadataRetriever
-import android.media.MediaPlayer
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.model.Song
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 class SongDaoStorage private constructor() {
 
@@ -22,10 +17,8 @@ class SongDaoStorage private constructor() {
         files?.let {
             for (file in it) {
                 if (file.isDirectory) {
-                    // if is a directory, look recursively in that directories
                     mp3Files.addAll(findMP3Files(file))
                 } else {
-                    // if is a file, verify if is a mp3 file
                     if (file.name.lowercase().endsWith(".mp3")) {
 
                         val songName : String
@@ -80,3 +73,6 @@ class SongDaoStorage private constructor() {
         return true
     }
 }
+
+
+

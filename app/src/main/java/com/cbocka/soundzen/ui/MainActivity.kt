@@ -125,10 +125,6 @@ class MainActivity : AppCompatActivity() {
         binding.contentMain.navBottom.visibility = View.VISIBLE
     }
 
-    fun updatePlayerSongList(newSongList: List<Song>) {
-        musicService?.updateMusicFiles(newSongList)
-    }
-
     fun setTheme(darkTheme: Boolean) {
         when (darkTheme) {
             true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -296,6 +292,10 @@ class MainActivity : AppCompatActivity() {
         intent.putParcelableArrayListExtra("music_files", parcelableList)
 
         startService(intent)
+    }
+
+    fun updatePlayerSongList(newSongList: List<Song>) {
+        musicService?.updateMusicFiles(newSongList)
     }
 
     fun hidePlaybackControlsCardView() {

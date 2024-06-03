@@ -6,14 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.PagerAdapter
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.databinding.FragmentDownloadMusicParentBinding
-import com.cbocka.soundzen.databinding.FragmentDownloadMusicYtBinding
-import com.cbocka.soundzen.ui.MainActivity
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DownloadMusicParentFragment : Fragment() {

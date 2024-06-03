@@ -19,12 +19,10 @@ import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.FragmentSongsInDirectoryBinding
-import com.cbocka.soundzen.music_player.service.MusicService
 import com.cbocka.soundzen.ui.MainActivity
 import com.cbocka.soundzen.ui.base.FragmentProgressDialog
 import com.cbocka.soundzen.ui.base.OneOptionDialog
 import com.cbocka.soundzen.ui.base.TwoOptionsDialog
-import com.cbocka.soundzen.ui.mymusic.all_music.adapter.MyMusicListAdapter
 import com.cbocka.soundzen.ui.mymusic.song_in_directory.adapter.SongsInDirectoryAdapter
 import com.cbocka.soundzen.ui.mymusic.song_in_directory.usecase.SongsInDirectoryState
 import com.cbocka.soundzen.ui.mymusic.song_in_directory.usecase.SongsInDirectoryViewModel
@@ -84,7 +82,15 @@ class SongsInDirectoryFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+        binding.searchView.clearFocus()
+        binding.searchView.setQuery("", false)
         viewModel.resetState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.searchView.setQuery("", false)
+        binding.searchView.clearFocus()
     }
 
     override fun onDestroyView() {

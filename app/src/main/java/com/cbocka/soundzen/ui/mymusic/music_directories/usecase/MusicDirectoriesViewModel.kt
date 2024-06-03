@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.repository.SongRepository
-import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
 import com.cbocka.soundzen.utils.Locator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

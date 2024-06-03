@@ -1,6 +1,5 @@
 package com.cbocka.soundzen.data.dao
 
-import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.model.SongMP3
 import com.cbocka.soundzen.utils.HttpUtil
 import com.cbocka.soundzen.utils.Utils

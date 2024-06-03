@@ -42,14 +42,6 @@
         app:layout_constraintStart_toStartOf="@+id/tvSongTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvSongTitle" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/swFavourite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSwitchFavourite"
-        app:layout_constraintStart_toEndOf="@+id/tvSwitchFavourite"
-        app:layout_constraintTop_toTopOf="@+id/tvSwitchFavourite" />
-
     <TextView
         android:id="@+id/tvSwitchFavourite"
         android:layout_width="wrap_content"
@@ -89,29 +81,29 @@
         app:layout_constraintEnd_toStartOf="@+id/btnPlayPause"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swFavourite" />
+        app:layout_constraintTop_toBottomOf="@+id/imgFav" />
 
     <ImageButton
         android:id="@+id/btnPlayPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:src="@drawable/ic_pause"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPrevious"
         app:layout_constraintEnd_toStartOf="@+id/btnNext"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnPrevious"
-        app:layout_constraintTop_toBottomOf="@+id/swFavourite" />
+        app:layout_constraintTop_toTopOf="@+id/btnPrevious" />
 
     <ImageButton
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:src="@drawable/ic_skip_next"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnPlayPause"
-        app:layout_constraintTop_toBottomOf="@+id/swLoop" />
+        app:layout_constraintTop_toTopOf="@+id/btnPlayPause" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -123,5 +115,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPrevious" />
+
+    <ImageView
+        android:id="@+id/imgFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/heart_outline"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSwitchFavourite"
+        app:layout_constraintStart_toEndOf="@+id/tvSwitchFavourite"
+        app:layout_constraintTop_toTopOf="@+id/tvSwitchFavourite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

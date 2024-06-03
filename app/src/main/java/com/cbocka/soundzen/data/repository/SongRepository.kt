@@ -7,7 +7,7 @@ import java.io.File
 
 class SongRepository private constructor() {
     var allSongs = ArrayList<Song>()
-    var allDirectories = ArrayList<MusicDirectory>()
+    private var allDirectories = ArrayList<MusicDirectory>()
 
     companion object  {
         val instance = SongRepository()

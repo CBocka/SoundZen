@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cbocka.soundzen.data.model.MusicDirectory
-import com.cbocka.soundzen.data.model.Song
-import com.cbocka.soundzen.databinding.ItemAudioFileLayoutBinding
 import com.cbocka.soundzen.databinding.ItemMusicDirectoryLayoutBinding
 
 class MusicDirectoriesAdapter (private val context : Context, private val onClick : (MusicDirectory) -> Unit)

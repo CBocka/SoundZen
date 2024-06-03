@@ -137,28 +137,26 @@ class SongNotification private constructor() {
                 }
 
                 override fun onSkipToPrevious() {
-                    //instance.mediaSession.release()
 
                     val intent = Intent("TRACKS_TRACKS").putExtra("action_name", ACTION_PREVIOUS)
                     activity.sendBroadcast(intent)
+
+
                 }
 
                 override fun onSkipToNext() {
-                    //instance.mediaSession.release()
 
                     val intent = Intent("TRACKS_TRACKS").putExtra("action_name", ACTION_NEXT)
                     activity.sendBroadcast(intent)
                 }
 
                 override fun onPlay() {
-                    //instance.mediaSession.release()
 
                     val intent = Intent("TRACKS_TRACKS").putExtra("action_name", ACTION_PLAY)
                     activity.sendBroadcast(intent)
                 }
 
                 override fun onPause() {
-                    //instance.mediaSession.release()
 
                     val intent = Intent("TRACKS_TRACKS").putExtra("action_name", ACTION_PLAY)
                     activity.sendBroadcast(intent)

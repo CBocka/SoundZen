@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.utils.Locator
 import com.google.android.exoplayer2.ExoPlayer
@@ -13,6 +14,7 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 
 class MusicService : Service() {
+
     companion object {
         const val ACTION_NEW_SONG = "com.soundzen.NEW_SONG"
         lateinit var musicFiles: List<Song>
@@ -78,7 +80,6 @@ class MusicService : Service() {
 
     private fun playMusic() {
         isPlaying = true
-
         exoPlayer!!.stop()
         exoPlayer!!.clearMediaItems()
 
@@ -86,6 +87,7 @@ class MusicService : Service() {
         val mediaItem: MediaItem = MediaItem.fromUri(musicFilePath)
         exoPlayer!!.setMediaItem(mediaItem)
         exoPlayer!!.prepare()
+        exoPlayer!!.play()
     }
 
     fun updateMusicFiles(newMusicFiles: List<Song>) {
@@ -140,3 +142,6 @@ class MusicService : Service() {
         }
     }
 }
+
+
+

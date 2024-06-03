@@ -1,9 +1,5 @@
 package com.cbocka.soundzen.ui.mymusic.song_details
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -23,6 +19,8 @@ import com.google.android.exoplayer2.Player
 
 class SongDetailsFragment : Fragment() {
 
+    private var isCurrentSongFavorite: Boolean = false
+
     private var _binding: FragmentSongDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -40,40 +38,6 @@ class SongDetailsFragment : Fragment() {
 
         return binding.root
     }
-
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        musicService = (activity as MainActivity).musicService!!
-
-        setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
-        setupPlaybackControls()
-
-        binding.swLoop.isChecked = false
-
-        binding.swLoop.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                musicService.setLooping(true)
-            } else {
-                musicService.setLooping(false)
-            }
-        }
-
-        MusicService.exoPlayer?.addListener(object : Player.EventListener {
-            override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-
-                if (playbackState == ExoPlayer.STATE_READY || playbackState == ExoPlayer.STATE_BUFFERING) {
-                    val duration = MusicService.exoPlayer!!.duration
-                    val currentPosition = MusicService.exoPlayer!!.currentPosition
-                    binding.seekBar.max = duration.toInt()
-                    binding.seekBar.progress = currentPosition.toInt()
-                } else if (playbackState == ExoPlayer.STATE_ENDED) {
-                    musicService.playNext()
-                    setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
-                }
-            }
-        })
-    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -98,16 +62,28 @@ class SongDetailsFragment : Fragment() {
                     binding.seekBar.progress = currentPosition.toInt()
 
                     if (playbackState == ExoPlayer.STATE_READY) {
-                        handler.post(updateSeekBar) // Comienza la actualización de la seekBar
+                        handler.post(updateSeekBar)
                     } else {
-                        handler.removeCallbacks(updateSeekBar) // Detiene la actualización cuando la reproducción no está en curso
+                        handler.removeCallbacks(updateSeekBar)
                     }
                 } else if (playbackState == ExoPlayer.STATE_ENDED) {
-                    musicService.playNext()
                     setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
                 }
             }
         })
+
+        binding.imgFav.setOnClickListener {
+            val currentSong = MusicService.musicFiles[MusicService.currentSongIndex]
+            currentSong.isFavorite = !currentSong.isFavorite
+            // Aquí deberías guardar el estado de la canción favorita en tu base de datos o preferencias
+            // Puedes usar el método setUpDetails para actualizar la vista con el nuevo estado
+            setUpDetails(currentSong)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
     }
 
     override fun onDestroyView() {
@@ -115,8 +91,6 @@ class SongDetailsFragment : Fragment() {
 
         (activity as MainActivity).setBottomNavVisible()
         (activity as MainActivity).showPlaybackControlsCardView()
-
-        _binding = null
 
         handler.removeCallbacks(updateSeekBar)
     }
@@ -133,7 +107,9 @@ class SongDetailsFragment : Fragment() {
     private fun setUpDetails(song: Song) {
         binding.tvSongArtist.text = song.artist
         binding.tvSongTitle.text = song.songName
-        binding.swFavourite.isChecked = song.isFavorite
+
+        isCurrentSongFavorite = song.isFavorite
+        updateFavoriteImage()
     }
 
     private fun setupPlaybackControls() {
@@ -191,6 +167,14 @@ class SongDetailsFragment : Fragment() {
             val currentPosition = MusicService.exoPlayer?.currentPosition ?: 0
             binding.seekBar.progress = currentPosition.toInt()
             handler.postDelayed(this, 1000)
+        }
+    }
+
+    private fun updateFavoriteImage() {
+        if (isCurrentSongFavorite) {
+            binding.imgFav.setImageResource(R.drawable.heart)
+        } else {
+            binding.imgFav.setImageResource(R.drawable.heart_outline)
         }
     }
 }
