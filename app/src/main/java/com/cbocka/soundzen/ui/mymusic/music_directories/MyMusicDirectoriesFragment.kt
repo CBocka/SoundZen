@@ -65,11 +65,6 @@ class MyMusicDirectoriesFragment : Fragment() {
         viewModel.getDirectoriesList()
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.resetState()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -99,7 +94,7 @@ class MyMusicDirectoriesFragment : Fragment() {
     }
 
     private fun onNoData() {
-        binding.tvMyDirectoriesNoData.text = getString(R.string.music_directories_list_no_data2,
+        binding.tvMyDirectoriesNoData2.text = getString(R.string.music_directories_list_no_data2,
             Locator.settingsPreferencesRepository.getString(
                 getString(R.string.preference_location_path_key),"/storage/emulated/0/Music/"))
 
@@ -129,6 +124,7 @@ class MyMusicDirectoriesFragment : Fragment() {
         binding.btnGoToDirectory.visibility = View.GONE
 
         Locator.loadDirectories = false
+        Locator.loadSongsFromDirectory = true
 
         directoriesAdapter.submitList(viewModel.allDirectories)
     }

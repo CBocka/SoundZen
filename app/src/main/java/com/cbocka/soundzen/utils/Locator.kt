@@ -23,4 +23,5 @@ object Locator {
 
     var loadSongs : Boolean = true
     var loadDirectories : Boolean = true
+    var loadSongsFromDirectory = true
 }

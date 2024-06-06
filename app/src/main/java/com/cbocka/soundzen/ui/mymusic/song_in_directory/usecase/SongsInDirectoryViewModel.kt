@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.repository.SongRepository
+import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
 import com.cbocka.soundzen.utils.Locator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -30,26 +31,30 @@ class SongsInDirectoryViewModel : ViewModel() {
                 Locator.requireApplication.getString(R.string.preference_order_list_key), "SONG"
             )
 
-            state.postValue(SongsInDirectoryState.Loading(true))
+            if (Locator.loadSongsFromDirectory) {
+                state.postValue(SongsInDirectoryState.Loading(true))
 
-            allSongs = SongRepository.instance.getSongsFromDirectory(File(directoryPath))
+                SongRepository.instance.getSongsFromDirectory(File(directoryPath))
 
-            delay(800)
-            state.postValue(SongsInDirectoryState.Loading(false))
-            delay(100)
-
-            if (allSongs.isNotEmpty()) {
-                allSongs = when (songOrder) {
-                    "SONG" -> allSongs.sortedBy { it.songName.lowercase() }.toMutableList()
-                    "ARTIST" -> allSongs.sortedBy {
-                        if (it.artist == Song.DEFAULT_ARTIST)
-                            "zzz"
-                        else
-                            it.artist.lowercase()
-                    }.toMutableList()
-                    else -> allSongs
-                }
+                delay(800)
+                state.postValue(SongsInDirectoryState.Loading(false))
+                delay(100)
             }
+
+            if (SongRepository.instance.songFromADirectory.isNotEmpty())
+                when (songOrder) {
+                    "SONG" ->
+                        allSongs =
+                            SongRepository.instance.songFromADirectory.sortedBy { it.songName.lowercase() } as MutableList<Song>
+
+                    "ARTIST" ->
+                        allSongs = SongRepository.instance.songFromADirectory.sortedBy {
+                            if (it.artist == Song.DEFAULT_ARTIST)
+                                "zzz"
+                            else
+                                it.artist.lowercase()
+                        } as MutableList<Song>
+                }
 
             when {
                 allSongs.isEmpty() -> state.postValue(SongsInDirectoryState.NoData)
@@ -64,6 +69,8 @@ class SongsInDirectoryViewModel : ViewModel() {
 
     fun deleteSong(song: Song) : Boolean {
         Locator.loadSongs = true
+        Locator.loadSongsFromDirectory = true
+
         return SongRepository.instance.deleteSong(song)
     }
 }

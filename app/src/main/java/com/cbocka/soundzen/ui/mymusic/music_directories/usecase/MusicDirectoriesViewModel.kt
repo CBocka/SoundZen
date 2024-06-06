@@ -43,13 +43,9 @@ class MusicDirectoriesViewModel : ViewModel() {
             }
 
             when {
-                allDirectories.isEmpty() -> state.postValue(MusicDirectoriesState.NoData)
+                allDirectories.isNullOrEmpty() -> state.postValue(MusicDirectoriesState.NoData)
                 else -> state.postValue(MusicDirectoriesState.Success)
             }
         }
-    }
-
-    fun resetState() {
-        state.value = MusicDirectoriesState.Completed
     }
 }

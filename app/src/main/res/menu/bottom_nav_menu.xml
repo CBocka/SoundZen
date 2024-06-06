@@ -8,8 +8,8 @@
         android:icon="@drawable/ic_music"
         android:title="@string/action_my_music" />
     <item
-        android:id="@+id/rapidFireFragment"
-        android:icon="@drawable/ic_rapidfire"
+        android:id="@+id/playListFragment"
+        android:icon="@drawable/playlist_music"
         android:title="@string/action_pay_lists" />
     <item
         android:id="@+id/downloadMusicParentFragment"

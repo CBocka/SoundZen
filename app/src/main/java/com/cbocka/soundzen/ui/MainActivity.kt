@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val darkTheme: Boolean = Locator.settingsPreferencesRepository.getBoolean(
             getString(R.string.preference_theme_key),
-            false
+            true
         )
         setTheme(darkTheme)
 
@@ -271,6 +271,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMusicService() {
+
+        binding.contentMain.cvSongPlaying.setOnClickListener {}
+
         binding.contentMain.imgPauseContinue.setOnClickListener { _ ->
             if (MusicService.exoPlayer!!.isPlaying) {
                 onSongPause()

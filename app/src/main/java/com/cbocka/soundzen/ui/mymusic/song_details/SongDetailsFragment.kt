@@ -19,8 +19,6 @@ import com.google.android.exoplayer2.Player
 
 class SongDetailsFragment : Fragment() {
 
-    private var isCurrentSongFavorite: Boolean = false
-
     private var _binding: FragmentSongDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -60,14 +58,19 @@ class SongDetailsFragment : Fragment() {
                     val currentPosition = MusicService.exoPlayer?.currentPosition ?: 0
                     binding.seekBar.max = duration.toInt()
                     binding.seekBar.progress = currentPosition.toInt()
+                    binding.tvCurrentTime.text = getTimeString(currentPosition)
 
                     if (playbackState == ExoPlayer.STATE_READY) {
+                        binding.tvDuration.text = getTimeString(duration)
                         handler.post(updateSeekBar)
+                        startUpdateCurrentTime()
                     } else {
                         handler.removeCallbacks(updateSeekBar)
+                        stopUpdateCurrentTime()
                     }
                 } else if (playbackState == ExoPlayer.STATE_ENDED) {
                     setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
+                    stopUpdateCurrentTime()
                 }
             }
         })
@@ -98,17 +101,24 @@ class SongDetailsFragment : Fragment() {
     private fun setBackgroundColor() {
         val darkTheme : Boolean = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
 
-        if (darkTheme)
+        if (darkTheme) {
             binding.clSongDetails.setBackgroundColor(Color.parseColor("#141414"))
-        else
+            binding.btnNext.setColorFilter(Color.WHITE)
+            binding.btnPlayPause.setColorFilter(Color.WHITE)
+            binding.btnPrevious.setColorFilter(Color.WHITE)
+        }
+        else {
             binding.clSongDetails.setBackgroundColor(Color.parseColor("#ffffff"))
+            binding.btnNext.setColorFilter(Color.BLACK)
+            binding.btnPlayPause.setColorFilter(Color.BLACK)
+            binding.btnPrevious.setColorFilter(Color.BLACK)
+        }
     }
 
     private fun setUpDetails(song: Song) {
         binding.tvSongArtist.text = song.artist
         binding.tvSongTitle.text = song.songName
 
-        isCurrentSongFavorite = song.isFavorite
         updateFavoriteImage()
     }
 
@@ -116,7 +126,7 @@ class SongDetailsFragment : Fragment() {
         binding.btnPlayPause.setOnClickListener {
             if (MusicService.isPlaying) {
                 musicService.pause()
-                binding.btnPlayPause.setImageResource(R.drawable.ic_play)
+                binding.btnPlayPause.setImageResource(R.drawable.play_circle)
 
             } else {
                 musicService.resume()
@@ -171,10 +181,34 @@ class SongDetailsFragment : Fragment() {
     }
 
     private fun updateFavoriteImage() {
-        if (isCurrentSongFavorite) {
+        if (MusicService.musicFiles[MusicService.currentSongIndex].isFavorite) {
             binding.imgFav.setImageResource(R.drawable.heart)
         } else {
             binding.imgFav.setImageResource(R.drawable.heart_outline)
         }
     }
+
+    private fun getTimeString(timeMs: Long): String {
+        val minutes = (timeMs / 1000) / 60
+        val seconds = (timeMs / 1000) % 60
+        return String.format("%02d:%02d", minutes, seconds)
+    }
+
+    private val updateCurrentTimeRunnable = object : Runnable {
+        override fun run() {
+            val currentPosition = MusicService.exoPlayer?.currentPosition ?: 0
+            binding.seekBar.progress = currentPosition.toInt()
+            binding.tvCurrentTime.text = getTimeString(currentPosition)
+            handler.postDelayed(this, 1000)
+        }
+    }
+
+    private fun startUpdateCurrentTime() {
+        handler.post(updateCurrentTimeRunnable)
+    }
+
+    private fun stopUpdateCurrentTime() {
+        handler.removeCallbacks(updateCurrentTimeRunnable)
+    }
+
 }

@@ -8,6 +8,7 @@ import java.io.File
 class SongRepository private constructor() {
     var allSongs = ArrayList<Song>()
     private var allDirectories = ArrayList<MusicDirectory>()
+    var songFromADirectory = ArrayList<Song>()
 
     companion object  {
         val instance = SongRepository()
@@ -20,6 +21,8 @@ class SongRepository private constructor() {
     }
 
     fun getSongsFromDirectory(directory: File) : ArrayList<Song> {
+        songFromADirectory = SongDaoStorage.instance.findMP3Files(directory)
+
         return SongDaoStorage.instance.findMP3Files(directory)
     }
 

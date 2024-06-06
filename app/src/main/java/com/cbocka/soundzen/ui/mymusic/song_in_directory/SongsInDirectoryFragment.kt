@@ -203,6 +203,8 @@ class SongsInDirectoryFragment : Fragment() {
         binding.tvMyMusicNoData2.visibility = View.GONE
         binding.btnGoToDirectory.visibility = View.GONE
 
+        Locator.loadSongsFromDirectory = false
+
         songsAdapter.submitList(viewModel.allSongs)
     }
 

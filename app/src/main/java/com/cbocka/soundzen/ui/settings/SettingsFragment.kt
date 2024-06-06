@@ -25,7 +25,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun initPreferenceTheme() {
         val theme = preferenceManager.findPreference<SwitchPreferenceCompat>(getString(R.string.preference_theme_key))
-        theme?.isChecked = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key),false)
+        theme?.isChecked = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key),true)
 
         theme?.setOnPreferenceChangeListener { _, newBoolean ->
             Locator.settingsPreferencesRepository.putBoolean(getString(R.string.preference_theme_key),newBoolean as Boolean)
@@ -66,6 +66,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 location.summary = (activity as MainActivity).downloadPath
 
                 Locator.loadSongs = true
+                Locator.loadDirectories = true
+                Locator.loadSongsFromDirectory = true
             }
             true
         }
