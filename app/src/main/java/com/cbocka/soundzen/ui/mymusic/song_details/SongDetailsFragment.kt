@@ -99,7 +99,8 @@ class SongDetailsFragment : Fragment() {
     }
 
     private fun setBackgroundColor() {
-        val darkTheme : Boolean = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
+
+        val darkTheme = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
 
         if (darkTheme) {
             binding.clSongDetails.setBackgroundColor(Color.parseColor("#141414"))
@@ -124,13 +125,14 @@ class SongDetailsFragment : Fragment() {
 
     private fun setupPlaybackControls() {
         binding.btnPlayPause.setOnClickListener {
+
             if (MusicService.isPlaying) {
                 musicService.pause()
                 binding.btnPlayPause.setImageResource(R.drawable.play_circle)
 
             } else {
                 musicService.resume()
-                binding.btnPlayPause.setImageResource(R.drawable.ic_pause)
+                binding.btnPlayPause.setImageResource(R.drawable.pause_circle)
             }
         }
 
