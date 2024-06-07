@@ -3,12 +3,15 @@ package com.cbocka.soundzen.data.repository
 import com.cbocka.soundzen.data.dao.SongDaoStorage
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.model.Song
+import com.cbocka.soundzen.utils.FavoritesManager
+import com.cbocka.soundzen.utils.Locator
 import java.io.File
 
 class SongRepository private constructor() {
     var allSongs = ArrayList<Song>()
     private var allDirectories = ArrayList<MusicDirectory>()
     var songFromADirectory = ArrayList<Song>()
+    var favouritesSongs = ArrayList<Song>()
 
     companion object  {
         val instance = SongRepository()
@@ -34,5 +37,9 @@ class SongRepository private constructor() {
 
     fun deleteSong(song: Song) : Boolean {
         return SongDaoStorage.instance.deleteSong(song)
+    }
+
+    fun getFavouriteSongs(): ArrayList<Song> {
+        return FavoritesManager.loadFavorites(Locator.requireApplication)
     }
 }

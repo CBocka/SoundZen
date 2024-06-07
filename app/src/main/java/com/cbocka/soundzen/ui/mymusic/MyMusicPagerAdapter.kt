@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.cbocka.soundzen.ui.mymusic.all_music.MyMusicFragment
+import com.cbocka.soundzen.ui.mymusic.favourite_song.FavouriteSongsFragment
 import com.cbocka.soundzen.ui.mymusic.music_directories.MyMusicDirectoriesFragment
 
 class MyMusicPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, private var mNumOfTabs: Int) :
@@ -18,7 +19,7 @@ class MyMusicPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle
         return when (position) {
             0 -> MyMusicFragment()
             1 -> MyMusicDirectoriesFragment()
-            2 -> MyMusicFragment()
+            2 -> FavouriteSongsFragment()
             else -> Fragment()
         }
     }

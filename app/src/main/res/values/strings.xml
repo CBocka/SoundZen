@@ -83,4 +83,13 @@
     <string name="switch_favourite_label">En favoritas</string>
     <string name="switch_loop_label">Reproducción en bucle</string>
 
+    <!-- FavouriteSongsFragment -->
+    <string name="favourites_list_no_data">Aún no tienes canciones en favoritas</string>
+    <string name="favourites_list_no_data2">Puedes añadirlas desde la ventana de reproducción</string>
+    <string name="delete_favourite_dialog_title">Atención</string>
+    <string name="delete_favourite_dialog_message">¿Seguro que desea eliminar la canción de favoritos?</string>
+    <string name="delete_favourite_error_dialog_title">Error</string>
+    <string name="delete_favourite_error_dialog_message">No pudo eliminarse la canción</string>
+    <string name="Toast_favourite_deleted_message">Canción eliminada de favoritos con éxito</string>
+
 </resources>

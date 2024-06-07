@@ -13,6 +13,7 @@ import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.FragmentSongDetailsBinding
 import com.cbocka.soundzen.music_player.service.MusicService
 import com.cbocka.soundzen.ui.MainActivity
+import com.cbocka.soundzen.utils.FavoritesManager
 import com.cbocka.soundzen.utils.Locator
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
@@ -68,6 +69,9 @@ class SongDetailsFragment : Fragment() {
                         handler.removeCallbacks(updateSeekBar)
                         stopUpdateCurrentTime()
                     }
+
+                    setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
+
                 } else if (playbackState == ExoPlayer.STATE_ENDED) {
                     setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
                     stopUpdateCurrentTime()
@@ -78,8 +82,13 @@ class SongDetailsFragment : Fragment() {
         binding.imgFav.setOnClickListener {
             val currentSong = MusicService.musicFiles[MusicService.currentSongIndex]
             currentSong.isFavorite = !currentSong.isFavorite
-            // Aquí deberías guardar el estado de la canción favorita en tu base de datos o preferencias
-            // Puedes usar el método setUpDetails para actualizar la vista con el nuevo estado
+
+            if (currentSong.isFavorite) {
+                FavoritesManager.addFavorite(Locator.requireApplication, currentSong)
+            } else {
+                FavoritesManager.removeFavorite(Locator.requireApplication, currentSong)
+            }
+
             setUpDetails(currentSong)
         }
     }
@@ -183,7 +192,7 @@ class SongDetailsFragment : Fragment() {
     }
 
     private fun updateFavoriteImage() {
-        if (MusicService.musicFiles[MusicService.currentSongIndex].isFavorite) {
+        if (FavoritesManager.isFavorite(Locator.requireApplication, MusicService.musicFiles[MusicService.currentSongIndex])) {
             binding.imgFav.setImageResource(R.drawable.heart)
         } else {
             binding.imgFav.setImageResource(R.drawable.heart_outline)
@@ -212,5 +221,4 @@ class SongDetailsFragment : Fragment() {
     private fun stopUpdateCurrentTime() {
         handler.removeCallbacks(updateCurrentTimeRunnable)
     }
-
 }

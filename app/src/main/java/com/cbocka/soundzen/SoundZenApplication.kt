@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import com.cbocka.soundzen.music_player.notification.SongNotification
 import com.cbocka.soundzen.ui.MainActivity
+import com.cbocka.soundzen.utils.FavoritesManager
 
 class SoundZenApplication : Application() {
 
@@ -17,6 +18,8 @@ class SoundZenApplication : Application() {
 
         Locator.initWith(this)
         createDirectory()
+
+        FavoritesManager.loadFavorites(this)
     }
 
     private fun createDirectory() {

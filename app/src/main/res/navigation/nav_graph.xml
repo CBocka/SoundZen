@@ -90,5 +90,10 @@
         android:name="com.cbocka.soundzen.ui.mymusic.song_details.SongDetailsFragment"
         android:label="fragment_song_details"
         tools:layout="@layout/fragment_song_details" />
+    <fragment
+        android:id="@+id/favouriteSongsFragment"
+        android:name="com.cbocka.soundzen.ui.mymusic.favourite_song.FavouriteSongsFragment"
+        android:label="fragment_favourite_songs"
+        tools:layout="@layout/fragment_favourite_songs" />
 
 </navigation>
