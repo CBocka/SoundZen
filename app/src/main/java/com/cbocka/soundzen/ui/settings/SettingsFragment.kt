@@ -25,7 +25,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun initPreferenceTheme() {
         val theme = preferenceManager.findPreference<SwitchPreferenceCompat>(getString(R.string.preference_theme_key))
-        theme?.isChecked = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key),true)
+        theme?.isChecked = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key),false)
 
         theme?.setOnPreferenceChangeListener { _, newBoolean ->
             Locator.settingsPreferencesRepository.putBoolean(getString(R.string.preference_theme_key),newBoolean as Boolean)

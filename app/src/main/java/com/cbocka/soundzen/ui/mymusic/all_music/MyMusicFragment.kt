@@ -60,6 +60,8 @@ class MyMusicFragment : Fragment() {
             openFileDirectory()
         }
 
+        binding.btnRefresh.setOnClickListener { viewModel.getSongList() }
+
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when(it) {
                 is MyMusicListState.Loading -> onLoading(it.show)
@@ -174,11 +176,13 @@ class MyMusicFragment : Fragment() {
                 getString(R.string.preference_location_path_key),"/storage/emulated/0/Music/"))
 
         binding.rvMyMusic.visibility = View.GONE
+        binding.searchView.visibility = View.GONE
         binding.imgCircle.visibility = View.VISIBLE
         binding.animationViewItemList.visibility = View.VISIBLE
         binding.tvMyMusicNoData.visibility = View.VISIBLE
         binding.tvMyMusicNoData2.visibility = View.VISIBLE
         binding.btnGoToDirectory.visibility = View.VISIBLE
+        binding.btnRefresh.visibility = View.VISIBLE
     }
 
     private fun onLoading(showLoading : Boolean) {
@@ -192,11 +196,13 @@ class MyMusicFragment : Fragment() {
 
     private fun onSuccess() {
         binding.rvMyMusic.visibility = View.VISIBLE
+        binding.searchView.visibility = View.VISIBLE
         binding.imgCircle.visibility = View.GONE
         binding.animationViewItemList.visibility = View.GONE
         binding.tvMyMusicNoData.visibility = View.GONE
         binding.tvMyMusicNoData2.visibility = View.GONE
         binding.btnGoToDirectory.visibility = View.GONE
+        binding.btnRefresh.visibility = View.GONE
 
         Locator.loadSongs = false
 

@@ -91,6 +91,7 @@ class SongsInDirectoryFragment : Fragment() {
         super.onResume()
         binding.searchView.setQuery("", false)
         binding.searchView.clearFocus()
+        (activity as MainActivity).setBottomNavGone()
     }
 
     override fun onDestroyView() {
@@ -179,6 +180,7 @@ class SongsInDirectoryFragment : Fragment() {
                 getString(R.string.preference_location_path_key),"/storage/emulated/0/Music/"))
 
         binding.rvMyMusic.visibility = View.GONE
+        binding.searchView.visibility = View.GONE
         binding.imgCircle.visibility = View.VISIBLE
         binding.animationViewItemList.visibility = View.VISIBLE
         binding.tvMyMusicNoData.visibility = View.VISIBLE
@@ -197,6 +199,7 @@ class SongsInDirectoryFragment : Fragment() {
 
     private fun onSuccess() {
         binding.rvMyMusic.visibility = View.VISIBLE
+        binding.searchView.visibility = View.VISIBLE
         binding.imgCircle.visibility = View.GONE
         binding.animationViewItemList.visibility = View.GONE
         binding.tvMyMusicNoData.visibility = View.GONE

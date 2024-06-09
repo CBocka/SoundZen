@@ -15,6 +15,7 @@ import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.os.IBinder
 import android.os.Parcelable
 import android.view.Menu
@@ -163,29 +164,31 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun checkPermission() {
-        val permissionsToRequest = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.POST_NOTIFICATIONS
-        )
+        val permissionsToRequest = mutableListOf<String>()
 
-        val permissionsNeeded = mutableListOf<String>()
-        for (permission in permissionsToRequest) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    permission
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                permissionsNeeded.add(permission)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.READ_MEDIA_AUDIO)
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
         }
 
-        if (permissionsNeeded.isNotEmpty()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                permissionsToRequest.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
+            }
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 this,
-                permissionsNeeded.toTypedArray(),
+                permissionsToRequest.toTypedArray(),
                 PERMISSION_REQUEST_CODE
             )
         }
@@ -347,6 +350,5 @@ class MainActivity : AppCompatActivity() {
         else
             SongNotification.updateNotification(this, this)
     }
-
     //endregion
 }

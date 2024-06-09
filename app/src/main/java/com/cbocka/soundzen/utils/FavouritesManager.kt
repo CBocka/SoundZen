@@ -21,7 +21,7 @@ class FavoritesManager private constructor() {
                 if (!exists()) {
                     createNewFile()
                     FileWriter(this).use { writer ->
-                        writer.write("[]")  // Inicializa el fichero con un array JSON vacío
+                        writer.write("[]")
                     }
                 }
             }

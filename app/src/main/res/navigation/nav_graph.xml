@@ -27,11 +27,6 @@
         android:label="fragment_download_music"
         tools:layout="@layout/fragment_download_music_yt" />
     <fragment
-        android:id="@+id/playListFragment"
-        android:name="com.cbocka.soundzen.ui.playlist.PlayListFragment"
-        android:label="fragment_play_list"
-        tools:layout="@layout/fragment_play_list" />
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.cbocka.soundzen.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />

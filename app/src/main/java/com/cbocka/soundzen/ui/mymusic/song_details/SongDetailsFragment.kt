@@ -25,11 +25,16 @@ class SongDetailsFragment : Fragment() {
 
     private lateinit var musicService: MusicService
 
+    private var replaySong = false
+    private var darkTheme = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSongDetailsBinding.inflate(inflater, container, false)
+
+        darkTheme = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
 
         (activity as MainActivity).setBottomNavGone()
         setBackgroundColor()
@@ -46,10 +51,14 @@ class SongDetailsFragment : Fragment() {
         setUpDetails(MusicService.musicFiles[MusicService.currentSongIndex])
         setupPlaybackControls()
 
-        binding.swLoop.isChecked = MusicService.isLooping
+        binding.imgReplay.setOnClickListener {
 
-        binding.swLoop.setOnCheckedChangeListener { _, isChecked ->
-            musicService.setLooping(isChecked)
+            val currentSong = MusicService.musicFiles[MusicService.currentSongIndex]
+
+            replaySong = !replaySong
+            musicService.setLooping(replaySong)
+
+            setUpDetails(currentSong)
         }
 
         MusicService.exoPlayer?.addListener(object : Player.EventListener {
@@ -109,8 +118,6 @@ class SongDetailsFragment : Fragment() {
 
     private fun setBackgroundColor() {
 
-        val darkTheme = Locator.settingsPreferencesRepository.getBoolean(getString(R.string.preference_theme_key), false)
-
         if (darkTheme) {
             binding.clSongDetails.setBackgroundColor(Color.parseColor("#141414"))
             binding.btnNext.setColorFilter(Color.WHITE)
@@ -123,6 +130,13 @@ class SongDetailsFragment : Fragment() {
             binding.btnPlayPause.setColorFilter(Color.BLACK)
             binding.btnPrevious.setColorFilter(Color.BLACK)
         }
+
+        if (darkTheme && !replaySong)
+            binding.imgReplay.setImageResource(R.drawable.loop_white)
+        else if (!darkTheme && !replaySong)
+            binding.imgReplay.setImageResource(R.drawable.loop_black)
+        else
+            binding.imgReplay.setImageResource(R.drawable.loop_active)
     }
 
     private fun setUpDetails(song: Song) {
@@ -130,6 +144,7 @@ class SongDetailsFragment : Fragment() {
         binding.tvSongTitle.text = song.songName
 
         updateFavoriteImage()
+        updateLoopImage()
     }
 
     private fun setupPlaybackControls() {
@@ -196,6 +211,16 @@ class SongDetailsFragment : Fragment() {
             binding.imgFav.setImageResource(R.drawable.heart)
         } else {
             binding.imgFav.setImageResource(R.drawable.heart_outline)
+        }
+    }
+
+    private fun updateLoopImage() {
+        if (replaySong) {
+            binding.imgReplay.setImageResource(R.drawable.loop_active)
+        } else if (!replaySong && darkTheme) {
+            binding.imgReplay.setImageResource(R.drawable.loop_white)
+        } else {
+            binding.imgReplay.setImageResource(R.drawable.loop_black)
         }
     }
 

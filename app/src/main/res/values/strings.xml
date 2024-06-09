@@ -54,6 +54,8 @@
     <string name="Toast_song_deleted_message">Canción eliminada con éxito</string>
     <string name="search_view_hint">Buscar canción...</string>
 
+    <string name="refresh_button_text">Refrescar</string>
+
     <!-- MusicDirectoriesFragment -->
     <string name="music_directories_list_no_data">No se han encontrado directorios a mostrar</string>
     <string name="music_directories_list_no_data2">Crea tus carpetas para separar tu música en:\n\"%s\"</string>
@@ -91,5 +93,14 @@
     <string name="delete_favourite_error_dialog_title">Error</string>
     <string name="delete_favourite_error_dialog_message">No pudo eliminarse la canción</string>
     <string name="Toast_favourite_deleted_message">Canción eliminada de favoritos con éxito</string>
+
+    <!-- PlaylistFragment -->
+    <string name="playlist_no_data">No se han creado listas de reproducción aún</string>
+    <string name="playlist_no_data2">Crea tu primera lista de reproducción pulsando \"+\"</string>
+    <string name="delete_playlist_dialog_title">Atención</string>
+    <string name="delete_playlist_dialog_message">¿Seguro que desea eliminar la canción?</string>
+    <string name="delete_playlist_error_dialog_title">Error</string>
+    <string name="delete_playlist_error_dialog_message">No pudo eliminarse la canción</string>
+    <string name="Toast_playlist_deleted_message">Canción eliminada con éxito</string>
 
 </resources>
