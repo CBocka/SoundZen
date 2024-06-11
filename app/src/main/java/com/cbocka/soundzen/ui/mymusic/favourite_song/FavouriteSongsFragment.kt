@@ -68,6 +68,12 @@ class FavouriteSongsFragment : Fragment() {
         viewModel.resetState()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getSongList()
+        songsAdapter.submitList(viewModel.favoriteSongs)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -124,7 +130,8 @@ class FavouriteSongsFragment : Fragment() {
                 val resource = viewModel.deleteSong(song)
 
                 if (resource) {
-                    viewModel.getSongList()
+                    songsAdapter.notifyDataSetChanged()
+
                     Toast.makeText(requireContext(), getString(R.string.Toast_favourite_deleted_message), Toast.LENGTH_SHORT).show()
 
                 } else {

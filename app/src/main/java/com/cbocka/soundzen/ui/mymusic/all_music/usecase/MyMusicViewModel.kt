@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.repository.SongRepository
+import com.cbocka.soundzen.utils.FavoritesManager
 import com.cbocka.soundzen.utils.Locator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -71,5 +72,9 @@ class MyMusicViewModel() : ViewModel() {
     fun deleteSong(song: Song) : Boolean {
         Locator.loadSongs = true
         return SongRepository.instance.deleteSong(song)
+    }
+
+    fun addSongToFavourites(song: Song) {
+        FavoritesManager.addFavorite(Locator.requireApplication, song)
     }
 }

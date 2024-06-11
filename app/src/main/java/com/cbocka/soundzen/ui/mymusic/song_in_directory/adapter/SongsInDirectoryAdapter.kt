@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.media.MediaMetadataRetriever
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.databinding.ItemAudioFileLayoutBinding
+import com.cbocka.soundzen.utils.FavoritesManager
 import com.cbocka.soundzen.utils.Locator
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -42,6 +44,9 @@ class SongsInDirectoryAdapter(private val context : Context,
             binding.tvSongName.text = song.songName
             binding.tvArtistName.text = song.artist
             binding.tvFileName.text = song.mp3Name
+
+            if (FavoritesManager.isFavorite(Locator.requireApplication, song))
+                binding.favIcon.visibility = View.VISIBLE
 
             setSeparatorColor(binding)
 

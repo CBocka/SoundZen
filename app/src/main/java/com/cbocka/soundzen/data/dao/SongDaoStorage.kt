@@ -52,15 +52,30 @@ class SongDaoStorage private constructor() {
         files?.let {
             for (file in it) {
                 if (file.isDirectory && !file.name.startsWith(".")) {
-                    val musicDirectory = MusicDirectory(file.name, file.absolutePath)
-
-                    directories.add(musicDirectory)
+                    if (containsMp3FilesRecursively(file)) {
+                        val musicDirectory = MusicDirectory(file.name, file.absolutePath)
+                        directories.add(musicDirectory)
+                    }
                     directories.addAll(findDirectories(file))
                 }
             }
         }
 
         return directories
+    }
+
+    private fun containsMp3FilesRecursively(directory: File): Boolean {
+        val files = directory.listFiles() ?: return false
+        for (file in files) {
+            if (file.isFile && file.extension.equals("mp3", ignoreCase = true)) {
+                return true
+            } else if (file.isDirectory) {
+                if (containsMp3FilesRecursively(file)) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     fun deleteSong(song: Song) : Boolean {

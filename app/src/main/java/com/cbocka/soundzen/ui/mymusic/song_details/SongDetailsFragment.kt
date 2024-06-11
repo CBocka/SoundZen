@@ -25,7 +25,6 @@ class SongDetailsFragment : Fragment() {
 
     private lateinit var musicService: MusicService
 
-    private var replaySong = false
     private var darkTheme = false
 
     override fun onCreateView(
@@ -54,9 +53,9 @@ class SongDetailsFragment : Fragment() {
         binding.imgReplay.setOnClickListener {
 
             val currentSong = MusicService.musicFiles[MusicService.currentSongIndex]
+            val loop = MusicService.isLooping
 
-            replaySong = !replaySong
-            musicService.setLooping(replaySong)
+            musicService.setLooping(!loop)
 
             setUpDetails(currentSong)
         }
@@ -131,9 +130,9 @@ class SongDetailsFragment : Fragment() {
             binding.btnPrevious.setColorFilter(Color.BLACK)
         }
 
-        if (darkTheme && !replaySong)
+        if (darkTheme && !MusicService.isLooping)
             binding.imgReplay.setImageResource(R.drawable.loop_white)
-        else if (!darkTheme && !replaySong)
+        else if (!darkTheme && !MusicService.isLooping)
             binding.imgReplay.setImageResource(R.drawable.loop_black)
         else
             binding.imgReplay.setImageResource(R.drawable.loop_active)
@@ -215,9 +214,9 @@ class SongDetailsFragment : Fragment() {
     }
 
     private fun updateLoopImage() {
-        if (replaySong) {
+        if (MusicService.isLooping) {
             binding.imgReplay.setImageResource(R.drawable.loop_active)
-        } else if (!replaySong && darkTheme) {
+        } else if (!MusicService.isLooping && darkTheme) {
             binding.imgReplay.setImageResource(R.drawable.loop_white)
         } else {
             binding.imgReplay.setImageResource(R.drawable.loop_black)

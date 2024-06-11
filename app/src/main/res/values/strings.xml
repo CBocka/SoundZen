@@ -94,6 +94,11 @@
     <string name="delete_favourite_error_dialog_message">No pudo eliminarse la canción</string>
     <string name="Toast_favourite_deleted_message">Canción eliminada de favoritos con éxito</string>
 
+    <string name="alert_dialog_option1">Añadir a favoritos</string>
+    <string name="alert_dialog_option2">Añadir a una playlist</string>
+    <string name="alert_dialog_option3">Eliminar canción</string>
+    <string name="alert_dialog_cancel">Cancelar</string>
+
     <!-- PlaylistFragment -->
     <string name="playlist_no_data">No se han creado listas de reproducción aún</string>
     <string name="playlist_no_data2">Crea tu primera lista de reproducción pulsando \"+\"</string>

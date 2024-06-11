@@ -11,7 +11,6 @@ class SongRepository private constructor() {
     var allSongs = ArrayList<Song>()
     private var allDirectories = ArrayList<MusicDirectory>()
     var songFromADirectory = ArrayList<Song>()
-    var favouritesSongs = ArrayList<Song>()
 
     companion object  {
         val instance = SongRepository()

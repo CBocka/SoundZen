@@ -49,7 +49,7 @@ class FavoritesManager private constructor() {
             )
         }
 
-        fun saveFavorites(context: Context, favorites: List<Song>) {
+        private fun saveFavorites(context: Context, favorites: List<Song>) {
             val jsonArray = JSONArray()
             for (favorite in favorites) {
                 jsonArray.put(songToJson(favorite))

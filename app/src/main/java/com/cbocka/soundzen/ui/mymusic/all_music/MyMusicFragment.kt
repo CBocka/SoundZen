@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
@@ -96,10 +97,27 @@ class MyMusicFragment : Fragment() {
 
     private fun initRecyclerView() {
 
-        songsAdapter = MyMusicListAdapter(requireContext(), { song, list -> onPlaySong(song, list) }, {deleteSong(it)})
+        songsAdapter = MyMusicListAdapter(requireContext(), { song, list -> onPlaySong(song, list) }, {showOptionsDialog(it)})
 
         binding.rvMyMusic.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMyMusic.adapter = songsAdapter
+    }
+
+    private fun showOptionsDialog(song: Song): Boolean {
+        val options = arrayOf(getString(R.string.alert_dialog_option1), getString(R.string.alert_dialog_option2), getString(R.string.alert_dialog_option3))
+
+        AlertDialog.Builder(requireContext())
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> addToFavourites(song)
+                    1 -> {}
+                    2 -> deleteSong(song)
+                }
+            }
+            .setNegativeButton(getString(R.string.alert_dialog_cancel), null)
+            .show()
+
+        return true
     }
 
     private fun onPlaySong(song: Song, list: List<Song>) {
@@ -128,6 +146,11 @@ class MyMusicFragment : Fragment() {
         (activity as MainActivity).updatePlayerSongList(tmpList)
     }
 
+    private fun addToFavourites(song: Song) {
+        viewModel.addSongToFavourites(song)
+        songsAdapter.notifyDataSetChanged()
+    }
+
     private fun deleteSong(song: Song) : Boolean {
 
         val dialog = TwoOptionsDialog.newInstance(
@@ -145,6 +168,7 @@ class MyMusicFragment : Fragment() {
                 val resource = viewModel.deleteSong(song)
 
                 if (resource) {
+                    songsAdapter.notifyDataSetChanged()
                     viewModel.getSongList()
                     Toast.makeText(requireContext(), getString(R.string.Toast_song_deleted_message), Toast.LENGTH_SHORT).show()
 

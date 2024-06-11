@@ -28,15 +28,20 @@ class FavouriteMusicViewModel: ViewModel() {
 
             favoriteSongs = SongRepository.instance.getFavouriteSongs()
 
-            if (SongRepository.instance.favouritesSongs.isNotEmpty()) {
-                favoriteSongs = when (songOrder) {
-                    "SONG" -> favoriteSongs.sortedBy { it.songName.lowercase() }.toMutableList()
-                    "ARTIST" -> favoriteSongs.sortedBy {
-                        if (it.artist == Song.DEFAULT_ARTIST) "zzz" else it.artist.lowercase()
-                    }.toMutableList()
-                    else -> favoriteSongs
+            if (favoriteSongs.isNotEmpty())
+                when (songOrder) {
+                    "SONG" ->
+                        favoriteSongs =
+                            favoriteSongs.sortedBy { it.songName.lowercase() } as MutableList<Song>
+
+                    "ARTIST" ->
+                        favoriteSongs = favoriteSongs.sortedBy {
+                            if (it.artist == Song.DEFAULT_ARTIST)
+                                "zzz"
+                            else
+                                it.artist.lowercase()
+                        } as MutableList<Song>
                 }
-            }
 
             when {
                 favoriteSongs.isEmpty() -> state.postValue(FavouriteMusicState.NoData)
@@ -51,8 +56,8 @@ class FavouriteMusicViewModel: ViewModel() {
 
     fun deleteSong(song: Song) : Boolean {
         FavoritesManager.removeFavorite(Locator.requireApplication, song)
-        favoriteSongs.remove(song)
-        state.value = if (favoriteSongs.isEmpty()) FavouriteMusicState.NoData else FavouriteMusicState.Success
+        getSongList()
+        if (favoriteSongs.isEmpty()) state.value = FavouriteMusicState.NoData
         return true
     }
 }
