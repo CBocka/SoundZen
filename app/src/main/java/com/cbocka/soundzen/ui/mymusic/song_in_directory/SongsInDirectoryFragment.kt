@@ -114,7 +114,12 @@ class SongsInDirectoryFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> addToFavourites(song)
+                    0 -> {
+                        if (viewModel.isFavourite(song))
+                            removeFromFavourites(song)
+                        else
+                            addToFavourites(song)
+                    }
                     1 -> {}
                     2 -> deleteSong(song)
                 }
@@ -186,6 +191,11 @@ class SongsInDirectoryFragment : Fragment() {
 
     private fun addToFavourites(song: Song) {
         viewModel.addSongToFavourites(song)
+        songsAdapter.notifyDataSetChanged()
+    }
+
+    private fun removeFromFavourites(song: Song) {
+        viewModel.removeSongFromFavourites(song)
         songsAdapter.notifyDataSetChanged()
     }
 

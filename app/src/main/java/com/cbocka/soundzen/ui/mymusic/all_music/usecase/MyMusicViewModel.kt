@@ -77,4 +77,12 @@ class MyMusicViewModel() : ViewModel() {
     fun addSongToFavourites(song: Song) {
         FavoritesManager.addFavorite(Locator.requireApplication, song)
     }
+
+    fun removeSongFromFavourites(song: Song) {
+        FavoritesManager.removeFavorite(Locator.requireApplication, song)
+    }
+
+    fun isFavourite(song: Song): Boolean {
+        return FavoritesManager.isFavorite(Locator.requireApplication, song)
+    }
 }

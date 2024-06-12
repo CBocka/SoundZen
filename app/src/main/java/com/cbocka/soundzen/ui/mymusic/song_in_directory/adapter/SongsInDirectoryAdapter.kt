@@ -47,6 +47,8 @@ class SongsInDirectoryAdapter(private val context : Context,
 
             if (FavoritesManager.isFavorite(Locator.requireApplication, song))
                 binding.favIcon.visibility = View.VISIBLE
+            else
+                binding.favIcon.visibility = View.GONE
 
             setSeparatorColor(binding)
 
