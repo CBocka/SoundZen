@@ -104,10 +104,10 @@
     <string name="playlist_no_data">No se han creado listas de reproducción aún</string>
     <string name="playlist_no_data2">Crea tu primera lista de reproducción pulsando \"+\"</string>
     <string name="delete_playlist_dialog_title">Atención</string>
-    <string name="delete_playlist_dialog_message">¿Seguro que desea eliminar la canción?</string>
+    <string name="delete_playlist_dialog_message">¿Seguro que desea eliminar la lista de reproducción?</string>
     <string name="delete_playlist_error_dialog_title">Error</string>
-    <string name="delete_playlist_error_dialog_message">No pudo eliminarse la canción</string>
-    <string name="Toast_playlist_deleted_message">Canción eliminada con éxito</string>
+    <string name="delete_playlist_error_dialog_message">No pudo eliminarse la playlist</string>
+    <string name="Toast_playlist_deleted_message">Playlist eliminada con éxito</string>
     <string name="item_playlist_size_text">Canciones en la playlist:   </string>
 
     <!-- CreatePlaylistFragment -->

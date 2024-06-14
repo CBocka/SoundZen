@@ -46,6 +46,7 @@ class SongPlaylistFragment : Fragment() {
         setBackgroundColor()
 
         playlistName = requireArguments().getString(Playlist.PLAYLIST_KEY)!!
+        viewModel.playlist = playlistName
 
         return binding.root
     }

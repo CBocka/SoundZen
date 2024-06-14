@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SoundZen</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="mymusic_loading_title">Loading…</string>
+    <string name="download_loading_title">Downloading…</string>
+    <string name="searching_loading_title">Searching for match…</string>
+
+    <!-- Preference Titles -->
+    <string name="preference_theme_header">App theme</string>
+    <string name="preference_order_header">Song ordering criteria</string>
+    <string name="preference_player_order_header">Song playback criteria</string>
+    <string name="preference_player_songs_location_header">Location to search for your music</string>
+
+    <!-- Preferences messages -->
+    <string name="preference_theme_title">Dark Theme</string>
+    <string name="preference_theme_summary_on">Sound Zen will show its dark theme</string>
+    <string name="preference_theme_summary_off">Sound Zen will show its light theme</string>
+    <string name="preference_songs_order">Select the order</string>
+    <string name="preference_songs_player_order">Select play mode</string>
+    <string name="order_entries_text1">Song Title</string>
+    <string name="order_entries_text2">Artist</string>
+    <string name="player_order_entries_text1">Sequential</string>
+    <string name="player_order_entries_text2">Aleatory</string>
+    <string name="preference_player_songs_location">Music Directory</string>
+
+    <!-- Preferences keys -->
+    <string name="preference_theme_key">soundzen_theme_key</string>
+    <string name="preference_order_list_key">soundzen_default_sort_key</string>
+    <string name="preference_player_order_key">soundzen_default_player_order_key</string>
+    <string name="preference_location_path_key">soundzen_location_path_key</string>
+
+    <string name="action_my_music">My Music</string>
+    <string name="action_download_music">Download</string>
+    <string name="action_playlists">Playlists</string>
+    <string name="action_settings">Preferences</string>
+
+    <!-- MyMusicFragment -->
+    <string name="all_music_tab_title">Songs</string>
+    <string name="directories_tab_title">Directories</string>
+    <string name="fav_music_tab_title">Favourites</string>
+    <string name="playlist_tab_title">Playlists</string>
+
+    <string name="my_music_list_no_data">No music found to display yet</string>
+    <string name="my_music_list_no_data2">Download your first song or bring your music to the directory:\n\"%s\"</string>
+    <string name="btn_goToDirectory_text">Go to directory</string>
+    <string name="delete_song_dialog_title">Warning</string>
+    <string name="delete_song_dialog_message">Are you sure you want to delete the song?</string>
+    <string name="delete_song_error_dialog_title">Error</string>
+    <string name="delete_song_error_dialog_message">Song could not be deleted</string>
+    <string name="Toast_song_deleted_message">Song successfully deleted</string>
+    <string name="search_view_hint">Search song...</string>
+
+    <string name="refresh_button_text">Refresh</string>
+
+    <!-- MusicDirectoriesFragment -->
+    <string name="music_directories_list_no_data">No directories found to display</string>
+    <string name="music_directories_list_no_data2">Create your folders to separate your music:\n\"%s\"</string>
+
+    <!-- DownloadMusicYTFragment -->
+    <string name="btn_downloadmp3_text">Download MP3</string>
+    <string name="tie_YouTube_link_hint">YouTube Link</string>
+    <string name="tie_Artist_Name_hint">Artist</string>
+    <string name="tie_Song_Name_hint">Song title</string>
+    <string name="url_mandatory_error">You have to introduce a URL</string>
+    <string name="artist_mandatory_error">You have to introduce the artist</string>
+    <string name="song_mandatory_error">You have to introduce the name of the song</string>
+    <string name="url_invalid_error">You have to introduce a valid URL</string>
+    <string name="dialog_title">Download completed</string>
+    <string name="dialog_message">Your song has been downloaded on the specified location</string>
+    <string name="download_search_tab_text">Search song</string>
+
+    <!-- DownloadMusicSearchFragment -->
+    <string name="til_search_hint">Enter the song and/or artist</string>
+    <string name="btn_searchmp3_text">Search song</string>
+    <string name="search_dialog_title">Song found</string>
+    <string name="search_dialog_message">Turn up the volume, the song is playing!\n\nIs this the one you are looking for?</string>
+    <string name="search_error_dialog_title">Song not found</string>
+    <string name="search_error_dialog_message">Make sure you enter the song data correctly and try again.\n\nIf this error persists, try using the link download tool.</string>
+
+    <!-- SongDetailsFragment -->
+    <string name="switch_favourite_label">On favorites</string>
+    <string name="switch_loop_label">Repeat mode</string>
+
+    <!-- FavouriteSongsFragment -->
+    <string name="favourites_list_no_data">No songs in favorites yet</string>
+    <string name="favourites_list_no_data2">You can add them from the playback window</string>
+    <string name="delete_favourite_dialog_title">Warning</string>
+    <string name="delete_favourite_dialog_message">Are you sure you want to remove the song from favorites?</string>
+    <string name="delete_favourite_error_dialog_title">Error</string>
+    <string name="delete_favourite_error_dialog_message">Song could not be deleted</string>
+    <string name="Toast_favourite_deleted_message">Song removed from favorites successfully</string>
+
+    <string name="alert_dialog_option1">Add or remove from favourites</string>
+    <string name="alert_dialog_option2">Add to playlist</string>
+    <string name="alert_dialog_option3">Delete song</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="no_playlists_toast_message">No playlist yet</string>
+
+    <!-- PlaylistFragment -->
+    <string name="playlist_no_data">No playlist created yet</string>
+    <string name="playlist_no_data2">Create your first playlist by pressing \"+\"</string>
+    <string name="delete_playlist_dialog_title">Warning</string>
+    <string name="delete_playlist_dialog_message">Are you sure you want to delete the playlist?</string>
+    <string name="delete_playlist_error_dialog_title">Error</string>
+    <string name="delete_playlist_error_dialog_message">Playlist could not be deleted</string>
+    <string name="Toast_playlist_deleted_message">Playlist deleted successfully</string>
+    <string name="item_playlist_size_text">Songs on the playlist:   </string>
+
+    <!-- CreatePlaylistFragment -->
+    <string name="create_playlist_title">Create your Playlist</string>
+    <string name="tie_create_playlist_hint">Introduce the name for your playlist</string>
+    <string name="tie_create_playlist_error">You have to introduce a name</string>
+    <string name="tie_create_playlist_duplicate_error">There is already a playlist with that name</string>
+    <string name="create_playlist_explanation">Add songs to your playlist from the list!</string>
+    <string name="create_playlist_success">Your playlist has been added!</string>
+
+    <!-- ChoosePlaylistFragment -->
+    <string name="choose_playlist_title">Choose the playlist to add the song to</string>
+    <string name="choose_playlist_button_text">Add to playlist</string>
+    <string name="choose_playlist_success_toast">Song added to the playlist</string>
+
+    <!-- SongsPlaylistFragment -->
+    <string name="songs_playlist_no_data">This playlist is empty</string>
+    <string name="songs_playlist_no_data2">Add songs to the playlist from the list</string>
+    <string name="delete_song_playlist_dialog_title">Warning</string>
+    <string name="delete_song_playlist_dialog_message">Are you sure you want to remove the song from the playlist?</string>
+    <string name="delete_song_playlist_error_dialog_title">Error</string>
+    <string name="delete_song_playlist_error_dialog_message">Song could not be removed</string>
+    <string name="Toast_song_playlist_deleted_message">Song removed from playlist successfully</string>
+
+</resources>

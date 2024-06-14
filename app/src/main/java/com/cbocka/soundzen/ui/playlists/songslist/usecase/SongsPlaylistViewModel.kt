@@ -57,6 +57,8 @@ class SongsPlaylistViewModel: ViewModel() {
     fun deleteSong(song: Song) : Boolean {
         PlaylistRepository.instance.removeSongFromPlaylist(playlist, song)
 
+        getSongList(playlist)
+
         if (songsOnPlaylist.isEmpty()) state.value = SongsPlaylistState.NoData
         return true
     }
