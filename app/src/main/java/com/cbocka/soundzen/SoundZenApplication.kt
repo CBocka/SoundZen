@@ -5,6 +5,7 @@ import com.cbocka.soundzen.utils.Locator
 import java.io.File
 import com.cbocka.soundzen.music_player.notification.SongNotification
 import com.cbocka.soundzen.utils.FavoritesManager
+import com.cbocka.soundzen.utils.PlaylistsManager
 
 class SoundZenApplication : Application() {
 
@@ -15,6 +16,7 @@ class SoundZenApplication : Application() {
         createDirectory()
 
         FavoritesManager.loadFavorites(this)
+        PlaylistsManager.loadPlaylists(this)
     }
 
     private fun createDirectory() {

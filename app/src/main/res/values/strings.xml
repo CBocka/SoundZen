@@ -35,7 +35,7 @@
 
     <string name="action_my_music">Mi Música</string>
     <string name="action_download_music">Descargar</string>
-    <string name="action_pay_lists">Playlists</string>
+    <string name="action_playlists">Playlists</string>
     <string name="action_settings">Preferencias</string>
 
     <!-- MyMusicFragment -->
@@ -98,6 +98,7 @@
     <string name="alert_dialog_option2">Añadir a una playlist</string>
     <string name="alert_dialog_option3">Eliminar canción</string>
     <string name="alert_dialog_cancel">Cancelar</string>
+    <string name="no_playlists_toast_message">No tienes ninguna playlist</string>
 
     <!-- PlaylistFragment -->
     <string name="playlist_no_data">No se han creado listas de reproducción aún</string>
@@ -107,5 +108,28 @@
     <string name="delete_playlist_error_dialog_title">Error</string>
     <string name="delete_playlist_error_dialog_message">No pudo eliminarse la canción</string>
     <string name="Toast_playlist_deleted_message">Canción eliminada con éxito</string>
+    <string name="item_playlist_size_text">Canciones en la playlist:   </string>
+
+    <!-- CreatePlaylistFragment -->
+    <string name="create_playlist_title">Crea tu playlist</string>
+    <string name="tie_create_playlist_hint">Introduce el nombre para tu playlist</string>
+    <string name="tie_create_playlist_error">Debes introducir un nombre</string>
+    <string name="tie_create_playlist_duplicate_error">Ya existe una playlist con ese nombre</string>
+    <string name="create_playlist_explanation">¡Añade canciones a tu playlist desde el listado!</string>
+    <string name="create_playlist_success">¡Tu playlist se ha añadido!</string>
+
+    <!-- ChoosePlaylistFragment -->
+    <string name="choose_playlist_title">Elige la playlist a la que añadir la canción</string>
+    <string name="choose_playlist_button_text">Añadir a la playlist</string>
+    <string name="choose_playlist_success_toast">Canción añadida a la playlist</string>
+
+    <!-- SongsPlaylistFragment -->
+    <string name="songs_playlist_no_data">Esta playlist está vacía</string>
+    <string name="songs_playlist_no_data2">Añade canciones a la playlist desde el listado</string>
+    <string name="delete_song_playlist_dialog_title">Atención</string>
+    <string name="delete_song_playlist_dialog_message">¿Seguro que desea eliminar la canción de la playlist?</string>
+    <string name="delete_song_playlist_error_dialog_title">Error</string>
+    <string name="delete_song_playlist_error_dialog_message">No pudo eliminarse la canción</string>
+    <string name="Toast_song_playlist_deleted_message">Canción eliminada de la playlist con éxito</string>
 
 </resources>

@@ -65,6 +65,11 @@ class MyMusicDirectoriesFragment : Fragment() {
         viewModel.getDirectoriesList()
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.resetState()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

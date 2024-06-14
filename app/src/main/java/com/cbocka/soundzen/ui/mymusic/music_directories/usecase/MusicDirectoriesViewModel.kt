@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.cbocka.soundzen.R
 import com.cbocka.soundzen.data.model.MusicDirectory
 import com.cbocka.soundzen.data.repository.SongRepository
+import com.cbocka.soundzen.ui.mymusic.all_music.usecase.MyMusicListState
 import com.cbocka.soundzen.utils.Locator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,6 +41,15 @@ class MusicDirectoriesViewModel : ViewModel() {
                 delay(800)
                 state.postValue(MusicDirectoriesState.Loading(false))
                 delay(100)
+            } else {
+                allDirectories = SongRepository.instance.getAllDirectories(
+                    File(
+                        Locator.settingsPreferencesRepository.getString(
+                            Locator.requireApplication.getString(R.string.preference_location_path_key),
+                            "/storage/emulated/0/Music/"
+                        )!!
+                    )
+                )
             }
 
             when {
@@ -47,5 +57,9 @@ class MusicDirectoriesViewModel : ViewModel() {
                 else -> state.postValue(MusicDirectoriesState.Success)
             }
         }
+    }
+
+    fun resetState() {
+        state.value = MusicDirectoriesState.Completed
     }
 }

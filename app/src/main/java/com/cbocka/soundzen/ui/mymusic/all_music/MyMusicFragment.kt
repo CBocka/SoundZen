@@ -115,7 +115,15 @@ class MyMusicFragment : Fragment() {
                         else
                             addToFavourites(song)
                     }
-                    1 -> {}
+                    1 -> {
+                        if (viewModel.anyPlaylistExists()) {
+                            val bundle = Bundle()
+                            bundle.putParcelable(Song.SONG_KEY, song)
+
+                            findNavController().navigate(R.id.action_myMusicParentFragment_to_choosePlaylistFragment, bundle)
+                        } else
+                            Toast.makeText(requireContext(), getString(R.string.no_playlists_toast_message), Toast.LENGTH_SHORT).show()
+                    }
                     2 -> deleteSong(song)
                 }
             }

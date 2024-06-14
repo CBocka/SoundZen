@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_myMusicParentFragment_to_songDetailsFragment"
             app:destination="@id/songDetailsFragment" />
+        <action
+            android:id="@+id/action_myMusicParentFragment_to_choosePlaylistFragment"
+            app:destination="@id/choosePlaylistFragment" />
     </fragment>
     <fragment
         android:id="@+id/songsInDirectoryFragment"
@@ -79,6 +82,9 @@
         <action
             android:id="@+id/action_songsInDirectoryFragment_to_songDetailsFragment"
             app:destination="@id/songDetailsFragment" />
+        <action
+            android:id="@+id/action_songsInDirectoryFragment_to_choosePlaylistFragment"
+            app:destination="@id/choosePlaylistFragment" />
     </fragment>
     <fragment
         android:id="@+id/songDetailsFragment"
@@ -90,5 +96,34 @@
         android:name="com.cbocka.soundzen.ui.mymusic.favourite_song.FavouriteSongsFragment"
         android:label="fragment_favourite_songs"
         tools:layout="@layout/fragment_favourite_songs" />
-
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.cbocka.soundzen.ui.playlists.list.PlaylistFragment"
+        android:label="fragment_playlist"
+        tools:layout="@layout/fragment_playlist" >
+        <action
+            android:id="@+id/action_playlistFragment_to_createPlaylistFragment"
+            app:destination="@id/createPlaylistFragment" />
+        <action
+            android:id="@+id/action_playlistFragment_to_songPlaylistFragment"
+            app:destination="@id/songPlaylistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPlaylistFragment"
+        android:name="com.cbocka.soundzen.ui.playlists.create.CreatePlaylistFragment"
+        android:label="CreatePlaylistFragment" />
+    <fragment
+        android:id="@+id/choosePlaylistFragment"
+        android:name="com.cbocka.soundzen.ui.playlists.choose_playlist.ChoosePlaylistFragment"
+        android:label="fragment_choose_playlist"
+        tools:layout="@layout/fragment_choose_playlist" />
+    <fragment
+        android:id="@+id/songPlaylistFragment"
+        android:name="com.cbocka.soundzen.ui.playlists.songslist.SongPlaylistFragment"
+        android:label="fragment_song_playlist"
+        tools:layout="@layout/fragment_song_playlist" >
+        <action
+            android:id="@+id/action_songPlaylistFragment_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
+    </fragment>
 </navigation>

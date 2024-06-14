@@ -34,7 +34,8 @@ data class Song(
 
     companion object CREATOR : Parcelable.Creator<Song> {
 
-        const val DEFAULT_ARTIST : String = "< Undefined >"
+        const val DEFAULT_ARTIST: String = "< Undefined >"
+        const val SONG_KEY: String = "SONG_KEY"
 
         override fun createFromParcel(parcel: Parcel): Song {
             return Song(parcel)

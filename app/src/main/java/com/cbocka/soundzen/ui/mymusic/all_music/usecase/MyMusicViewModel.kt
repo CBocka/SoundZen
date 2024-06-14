@@ -8,6 +8,7 @@ import com.cbocka.soundzen.data.model.Song
 import com.cbocka.soundzen.data.repository.SongRepository
 import com.cbocka.soundzen.utils.FavoritesManager
 import com.cbocka.soundzen.utils.Locator
+import com.cbocka.soundzen.utils.PlaylistsManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -84,5 +85,9 @@ class MyMusicViewModel() : ViewModel() {
 
     fun isFavourite(song: Song): Boolean {
         return FavoritesManager.isFavorite(Locator.requireApplication, song)
+    }
+
+    fun anyPlaylistExists(): Boolean {
+        return PlaylistsManager.allPlaylists.isNotEmpty()
     }
 }

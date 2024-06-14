@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/vBackground"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:background="#AD041D3A"
+        app:layout_constraintBottom_toTopOf="@+id/vSeparator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgPlaylist"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/playlist_music"
+        app:layout_constraintBottom_toBottomOf="@+id/vBackground"
+        app:layout_constraintEnd_toEndOf="@+id/vBackground"
+        app:layout_constraintStart_toStartOf="@+id/vBackground"
+        app:layout_constraintTop_toTopOf="@+id/vBackground"
+        app:tint="#6087AE" />
+
+    <TextView
+        android:id="@+id/tvPlaylistName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/monofonto"
+        android:singleLine="true"
+        android:layout_marginBottom="4dp"
+        android:text="Houdini"
+        android:textSize="17sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlaylistSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/vBackground"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPlaylistSize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/calling_code"
+        android:singleLine="true"
+        android:text="Dua Lipa -- Houdini.mp3"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvPlaylistName"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlaylistName" />
+
+    <View
+        android:id="@+id/vSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
