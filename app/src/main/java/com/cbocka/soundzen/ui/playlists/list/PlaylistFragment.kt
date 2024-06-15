@@ -38,6 +38,7 @@ class PlaylistFragment : Fragment() {
         _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
 
         (activity as MainActivity).setBottomNavVisible()
+        (activity as MainActivity).setCardViewPlayerGone()
 
         setBackgroundColor()
 

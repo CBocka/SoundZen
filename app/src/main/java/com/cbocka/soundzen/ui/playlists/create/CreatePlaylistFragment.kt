@@ -34,6 +34,7 @@ class CreatePlaylistFragment : Fragment() {
         _binding = FragmentCreatePlaylistBinding.inflate(inflater, container, false)
 
         (activity as MainActivity).setBottomNavGone()
+        (activity as MainActivity).setCardViewPlayerGone()
         setBackgroundColor()
 
         return binding.root

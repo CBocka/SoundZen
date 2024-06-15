@@ -126,6 +126,14 @@ class MainActivity : AppCompatActivity() {
         binding.contentMain.navBottom.visibility = View.VISIBLE
     }
 
+    fun setCardViewPlayerVisible() {
+        binding.contentMain.cvSongPlaying.visibility = View.VISIBLE
+    }
+
+    fun setCardViewPlayerGone() {
+        binding.contentMain.cvSongPlaying.visibility = View.GONE
+    }
+
     fun setTheme(darkTheme: Boolean) {
         when (darkTheme) {
             true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
