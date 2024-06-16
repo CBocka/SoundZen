@@ -6,9 +6,13 @@
 
 ## Aplicación Android desarrollada por Carlos Bocka López
 
+</br>
+
 ### Descargar la App
 
 Descarga la aplicación en tu móvil haciendo click [aquí](https://github.com/CBocka/SoundZen/raw/master/SoundZen.apk "aquí")
+
+</br>
 
 ### Introducción
 
@@ -16,17 +20,21 @@ SoundZen es una solución todo en uno de porte clásico para tu colección de m�
 
 En un tiempo donde la música es una pieza fundamental en nuestro estilo de vida, es clave tener una aplicación que no solo reproduzca tus canciones locales, sino que también te permita descargar nuevas canciones que quieras incorporar a tu colección. Por eso, SoundZen se enfoca en crear una app para Android que sea un reproductor de música completo, con la capacidad de ampliar tu biblioteca con nuevas canciones descargables, además de algunas otras funcionalidades interesantes, así como implementaciones básicas que son infaltables en cualquier aplicación de música.
 
+</br>
+
 ### Objetivos
 
 El objetivo principal de SoundZen es dar una opción de aplicación en Android para reproducir y gestionar música usando archivos locales, sin depender de la conexión a internet (excepto para algunas funciones avanzadas) y de manera totalmente gratuita.
 Uno de los objetivos para SoundZen es alejarse de las otras muchas aplicaciones del mismo tipo gracias a incorporar una mayor cantidad de funcionalidades pero manteniendo un estilo simple, intuitivo, accesible para todos y sin perder eficiencia y rapidez.
 Queremos brindar una solución todo en uno donde podremos llevar a cabo una gestión completa de nuestra colección privada de música. Será posible eliminar nuestras canciones, añadir nuevas, ordenarlas y categorizarlas, todo desde una misma aplicación.
 
+</br>
+
 ### Funcionalidades
 
 - Posibilidad por parte del usuario de cambiar la configuración básica de la aplicación.
 
-  <p align="center">
+<p align="center">
 <img src="https://github.com/CBocka/SoundZen/assets/156449965/2a4d93cc-b567-4f4c-93e9-fbb8e8c0b1da" height="450" width="220" >
 </p>
 
@@ -49,6 +57,8 @@ Queremos brindar una solución todo en uno donde podremos llevar a cabo una gest
 - Funcionalidad de listas de reproducción. Creación y eliminación de listas de reproducción y elección de las canciones que las conforman.
 
 - Reproducción de la música con posibilidad de controlar dicha reproducción desde dentro y fuera de la aplicación.
+
+</br>
 
 ### Versiones de Android
 
