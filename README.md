@@ -1,10 +1,10 @@
 # SoundZen
 
 <p align="center">
-<img src="https://github.com/CBocka/SoundZen/assets/156449965/d1864274-e70f-4e86-8223-bb7b24c8d35c" height="450" width="220" >
+<img src="https://github.com/CBocka/SoundZen/assets/156449965/d1864274-e70f-4e86-8223-bb7b24c8d35c" height="500" width="500" >
 </p>
 
-### Aplicación Android desarrollada por Carlos Bocka López
+## Aplicación Android desarrollada por Carlos Bocka López
 
 ### Descargar la App
 
@@ -56,15 +56,3 @@ Completamente desarrollada en un dispositivo con API Level 34 y versión de Andr
 Android 13 TP1A.220624.014
 
 Testeada en dispositivo con API 30.
-
-
-
-
-
-
-
-<div align="center">
-  <a href="https://github.com/CBocka/SoundZen/raw/master/SoundZen.apk">
-    <img src="https://github.com/AJimespDev/CryptoWallet/assets/152422892/86a368ca-689b-4f05-9e55-80b1724644c6" alt="Logo CryptoWallet" width="250">
-  </a>
-</div>
